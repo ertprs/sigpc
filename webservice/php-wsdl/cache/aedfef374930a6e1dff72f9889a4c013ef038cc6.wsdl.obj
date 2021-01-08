@@ -1,0 +1,86 @@
+a:11:{s:7:"version";s:3:"2.3";s:7:"methods";a:3:{i:0;O:13:"PhpWsdlMethod":7:{s:5:"Param";a:2:{i:0;O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";N;s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:17:"VERSAO_DO_CLIENTE";s:8:"Settings";N;}i:1;O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";N;s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:4:"ACAO";s:8:"Settings";N;}}s:6:"Return";O:12:"PhpWsdlParam":5:{s:4:"Type";s:5:"array";s:4:"Docs";s:53:"Retorno de array com mensagem ou arquivo ou retorno 1";s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:6:"return";s:8:"Settings";N;}s:8:"IsGlobal";b:0;s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:12:"versaoScript";s:4:"Docs";s:102:"Metodo de retorno padrao versaoScript
+Tem a funcao de informar ao web service a versao de seu cliente.";s:8:"Settings";N;}i:1;O:13:"PhpWsdlMethod":7:{s:5:"Param";a:1:{i:0;O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";s:56:"recebe array json exemplo FUNCAO PHP json_encode($dados)";s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:9:"arrayJson";s:8:"Settings";N;}}s:6:"Return";O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";s:52:"retorno de array json FUNCAO PHP json_encode($dados)";s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:6:"return";s:8:"Settings";N;}s:8:"IsGlobal";b:0;s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:7:"syncSMS";s:4:"Docs";s:517:"Metodo de retorno padrao syncSMS
+Tem a funcao de enviar e receber SMS do web service em uma unica acao.
+ARRAY PADRAO (array lista de sub array): array["0"] = subarray, array["1"] = subarray, array["2"] = subarray, etc.
+SUB ARRAY (sub array de duas posicoes): subarray["id"] = "556282998877" - subarray["num"] = "556282998877" -  subarray["msg"] = "Mensagem do SMS"
+ACAO: Recebe lista de SMS a enviar e envia SMS recebidos.
+Apos o recebimento dos dados SMS devem confirmar as mesmas pela funcao confirmaSMS($lista_ids)";s:8:"Settings";N;}i:2;O:13:"PhpWsdlMethod":7:{s:5:"Param";a:1:{i:0;O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";s:26:"ids separados por virgulas";s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:9:"lista_ids";s:8:"Settings";N;}}s:6:"Return";O:12:"PhpWsdlParam":5:{s:4:"Type";s:6:"string";s:4:"Docs";s:21:"retorno de sucesso: 1";s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:6:"return";s:8:"Settings";N;}s:8:"IsGlobal";b:0;s:4:"GUID";s:13:"561d8bee63535";s:4:"Name";s:11:"confirmaSMS";s:4:"Docs";s:162:"Metodo de retorno padrao confirmaSMS
+Tem a funcao de confirmar os ids de SMS como enviados.
+LISTA: 1,43,5,6,6
+ACAO: Recebe lista de SMS confirmando como enviadas.";s:8:"Settings";N;}}s:5:"types";a:0:{}s:5:"files";a:1:{i:0;s:31:"../classes/class.gatewaysms.php";}s:4:"name";s:9:"classSoap";s:4:"docs";N;s:4:"html";s:4375:"<html>
+<head>
+<title>classSoap interface description</title>
+<style type="text/css" media="all">
+body{font-family:Calibri,Arial;background-color:#fefefe;}
+.pre{font-family:Courier;}
+.normal{font-family:Calibri,Arial;}
+.bold{font-weight:bold;}
+h1,h2,h3{font-family:Verdana,Times;}
+h1{border-bottom:1px solid gray;}
+h2{border-bottom:1px solid silver;}
+h3{border-bottom:1px dashed silver;}
+a{text-decoration:none;}
+a:hover{text-decoration:underline;}
+.blue{color:#3400FF;}
+.lightBlue{color:#5491AF;}
+</style>
+<style type="text/css" media="print">
+.noprint{display:none;}
+</style>
+</head>
+<body>
+<h1>classSoap SOAP WebService interface description</h1>
+<p>Endpoint URI: <span class="pre">http://192.168.25.222/albert/Projetos/Integrador-Publico/gestor/webservice/gatewaysms/index.php</span></p>
+<p>WSDL URI: <span class="pre"><a href="http://192.168.25.222/albert/Projetos/Integrador-Publico/gestor/webservice/gatewaysms/index.php?WSDL&readable">http://192.168.25.222/albert/Projetos/Integrador-Publico/gestor/webservice/gatewaysms/index.php?WSDL</a></span></p>
+<p>PHP SOAP client download URI: <span class="pre"><a href="http://192.168.25.222/albert/Projetos/Integrador-Publico/gestor/webservice/gatewaysms/index.php?PHPSOAPCLIENT">http://192.168.25.222/albert/Projetos/Integrador-Publico/gestor/webservice/gatewaysms/index.php?PHPSOAPCLIENT</a></span></p>
+<div class="noprint">
+<h2>Index</h2>
+<p>Public methods:</p>
+<ul>
+<li><a href="#confirmaSMS"><span class="pre">confirmaSMS</span></a></li>
+<li><a href="#syncSMS"><span class="pre">syncSMS</span></a></li>
+<li><a href="#versaoScript"><span class="pre">versaoScript</span></a></li>
+</ul>
+</div>
+<h2>Public methods</h2>
+<h3>confirmaSMS</h3>
+<a name="confirmaSMS"></a>
+<p class="pre"><span class="blue">string</span> <span class="bold">confirmaSMS</span> (
+<span class="blue">string</span> <span class="bold">lista_ids</span>
+)</p>
+<p>Metodo de retorno padrao confirmaSMS<br>
+Tem a funcao de confirmar os ids de SMS como enviados.<br>
+LISTA: 1,43,5,6,6<br>
+ACAO: Recebe lista de SMS confirmando como enviadas.</p>
+<ul>
+<li class="pre"><span class="blue">string</span> <span class="bold">lista_ids</span><br><span class="normal">ids separados por virgulas</span></li>
+</ul>
+<p>Return value <span class="pre"><span class="blue">string</span></span>: retorno de sucesso: 1</p>
+<h3>syncSMS</h3>
+<a name="syncSMS"></a>
+<p class="pre"><span class="blue">string</span> <span class="bold">syncSMS</span> (
+<span class="blue">string</span> <span class="bold">arrayJson</span>
+)</p>
+<p>Metodo de retorno padrao syncSMS<br>
+Tem a funcao de enviar e receber SMS do web service em uma unica acao.<br>
+ARRAY PADRAO (array lista de sub array): array[&quot;0&quot;] = subarray, array[&quot;1&quot;] = subarray, array[&quot;2&quot;] = subarray, etc.<br>
+SUB ARRAY (sub array de duas posicoes): subarray[&quot;id&quot;] = &quot;556282998877&quot; - subarray[&quot;num&quot;] = &quot;556282998877&quot; -  subarray[&quot;msg&quot;] = &quot;Mensagem do SMS&quot;<br>
+ACAO: Recebe lista de SMS a enviar e envia SMS recebidos.<br>
+Apos o recebimento dos dados SMS devem confirmar as mesmas pela funcao confirmaSMS($lista_ids)</p>
+<ul>
+<li class="pre"><span class="blue">string</span> <span class="bold">arrayJson</span><br><span class="normal">recebe array json exemplo FUNCAO PHP json_encode($dados)</span></li>
+</ul>
+<p>Return value <span class="pre"><span class="blue">string</span></span>: retorno de array json FUNCAO PHP json_encode($dados)</p>
+<h3>versaoScript</h3>
+<a name="versaoScript"></a>
+<p class="pre"><a href="#array"><span class="lightBlue">array</span></a> <span class="bold">versaoScript</span> (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">string</span> <span class="bold">VERSAO_DO_CLIENTE</span>, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">string</span> <span class="bold">ACAO</span><br>
+)</p>
+<p>Metodo de retorno padrao versaoScript<br>
+Tem a funcao de informar ao web service a versao de seu cliente.</p>
+<p>Return value <span class="pre"><a href="#array"><span class="lightBlue">array</span></a></span>: Retorno de array com mensagem ou arquivo ou retorno 1</p>
+<hr>
+<p><small>Powered by <a href="#">Integrador Público</a><span class="noprint"> - PDF download: <a href="http://online.htmltopdf.de/?plain=1&filename=classSoap-webservices.pdf&print=1">Download this page as PDF</a></span></small></p>
+</body>
+</html>";s:3:"php";N;s:7:"wsdluri";N;s:6:"phpuri";N;s:6:"docuri";N;}

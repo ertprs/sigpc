@@ -1,0 +1,206 @@
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainerFai
+{
+	overflow: hidden;
+	position: relative;
+}
+
+.jspPaneFai
+{
+	position: absolute;
+}
+
+.jspVerticalBarFai
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 7px;
+	height: 100%;
+	/*background: red;*/
+}
+
+.jspHorizontalBarFai
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 15px;
+	background: red;
+}
+
+.jspVerticalBarFai *,
+.jspHorizontalBarFai *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.jspCapFai
+{
+	display: none;
+}
+
+.jspHorizontalBarFai .jspCapFai
+{
+	float: left;
+}
+
+.jspTrackFai
+{
+	background: #dde;
+	position: relative;
+}
+
+.jspDragFai
+{
+	background: #bbd;
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.jspHorizontalBarFai .jspTrackFai,
+.jspHorizontalBarFai .jspDragFai
+{
+	float: left;
+	height: 100%;
+}
+
+.jspArrowFai
+{
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.jspArrowFai.jspDisabledFai
+{
+	cursor: default;
+	background: #80808d;
+}
+
+.jspVerticalBarFai .jspArrowFai
+{
+	height: 7px;
+}
+
+.jspHorizontalBarFai .jspArrowFai
+{
+	width: 7px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBarFai .jspArrowFai:focus
+{
+	outline: none;
+}
+
+.jspCornerFai
+{
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+	display:none;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCornerFai
+{
+	margin: 0 -3px 0 0;
+}
+
+
+
+
+
+/* theme */
+
+.jspHorizontalBarFai,
+.jspVerticalBarFai,
+.jspTrackFai
+{
+	background:url("shadows/b10.png");
+}
+
+.jspDragFai
+{
+	background:url("shadows/b50.png");
+
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.jspTrackFai .jspActiveFai,
+.jspTrackFai .jspHoverFai,
+.jspDragFai:hover
+{
+	background:url("shadows/b90.png");
+}
+
+
+.jspArrowFai
+{
+	background: url(ui/ui-icons_222222_256x240.png) no-repeat;
+	
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.jspVerticalBarFai>.jspActiveFai,
+.jspArrowFai:hover
+{
+	background-image: url('ui/ui-icons_cd0a0a_256x240.png');
+}
+
+.jspVerticalBarFai>.jspDisabledFai,
+.jspVerticalBarFai>.jspDisabledFai:hover,
+.jspHorizontalBarFai>.jspDisabledFai,
+.jspHorizontalBarFai>.jspDisabledFai:hover
+{
+	background-color: transparent;
+	background-image: url('ui/ui-icons_888888_256x240.png');
+	background-position: -4px -5px;
+}
+
+.jspVerticalBarFai .jspArrowFai
+{
+	height: 7px;
+}
+
+.jspHorizontalBarFai .jspArrowFai
+{
+	width: 15px;
+}
+
+.jspArrowFaiUp
+{
+	background-position: -4px -5px;
+}
+
+.jspArrowFaiDown
+{
+	background-position: -69px -5px !important; 
+}
+
+.jspArrowFaiLeft
+{
+	background-position: -20px -242px !important;
+}
+
+.jspArrowFaiRight
+{
+	background-position: -1px -242px !important;
+}

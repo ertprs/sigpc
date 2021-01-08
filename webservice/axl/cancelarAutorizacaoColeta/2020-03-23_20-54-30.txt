@@ -1,0 +1,1 @@
+"{\n  \"numero_rnt\":\"17595874199\",\n  \"numero_processo\":\"08123597650\",\n  \"id_origem\":1,\n  \"codigo_motivo\":1,\n  \"motivo_cancelamento\":\"dados inconsist\u00eantes no cadastro\"\n}"

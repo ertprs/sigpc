@@ -1,0 +1,1 @@
+2020-06-29_17-21-34: {"numero_rnt":"50607580100","numero_processo":"53332724096","id_origem":1,"codigo_motivo":2,"motivo_cancelamento":"2"}2020-06-29_17-26-25: {"numero_rnt":"50607580100","numero_processo":"53332724096","id_origem":1,"codigo_motivo":2,"motivo_cancelamento":"2"}
