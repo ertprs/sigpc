@@ -1,7 +1,8 @@
 /config
 /offline
 /pre-cadastro
-/pre-cadastroOLD
 /script
 /senha
 /tradutor
+/cron/TIME
+/webservice/imp/*.txt
