@@ -1,5 +1,5 @@
 <?php // Breno Cruvinel - breno.cruvinel09@gmail.com
-//ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);
+//ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);aoskdpoaksdpok
 //INCLUDES DE CONTROLE --->>>
 include "config/globalSession.php";//inicia sessao php
 include "config/globalVars.php";//vars padrao
