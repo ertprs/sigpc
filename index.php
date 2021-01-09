@@ -29,7 +29,6 @@ if(isset($_GET["v"])){
 if(isset($_GET["l"])){
 	echo "<script>window.location='./login.php?l=".$_GET["l"]."';</script>";
     exit(0);
-    ////
 }//if(isset($_GET["l"])){
 
 //caminho do arquivo de tradução do menu
