@@ -1,0 +1,90 @@
+
+
+
+html, body {
+    overflow: hidden;
+}
+/* 
+    Document   : relatorios
+    Created on : 10/03/2009, 14:15:27
+    Author     : ulysses
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.menu_relatorio {
+    float: left;
+}
+
+.controle_grupos {
+    float: right;
+    margin: 3px;
+    padding: 5px;
+    z-index: +1;
+}
+
+
+/** GRUPOS TREEVIEW */
+.arvore_grupos {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.arvore_grupos ul {
+	background-color: white;
+	margin-top: 4px;
+}
+
+.arvore_grupos .hitarea {
+	background: url(../imgs/treeview-default.gif) -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+/* fix for IE6 */
+* html .hitarea {
+	display: inline;
+	float:none;
+}
+
+.arvore_grupos li {
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+
+.arvore_grupos a.selected {
+	background-color: #eee;
+}
+
+.arvore_grupos .hover { color: red; cursor: pointer; }
+
+.arvore_grupos li { background: url(../imgs/treeview-default-line.gif) 0 0 no-repeat; }
+.arvore_grupos li.collapsable { background-position: 0 -176px; }
+
+.arvore_grupos .expandable-hitarea { background-position: -80px -3px; }
+
+.arvore_grupos li.last { background-position: 0 -1766px }
+.arvore_grupos li.lastCollapsable { background-image: url(../imgs/treeview-default.gif); }
+.arvore_grupos li.lastCollapsable { background-position: 0 -111px }
+.arvore_grupos li.lastExpandable { background-position: -32px -67px }
+
+.arvore_grupos div.lastCollapsable-hitarea { background-position: 0; }
+
+.arvore_grupos li {
+    padding: 3px 0 2px 16px;
+}
+.arvore_grupos a {
+    text-decoration: none;
+    color: #000000;
+    padding-left: 2px;
+}
+.arvore_grupos .item_grupo_pai, .arvore_grupos .item_grupo_filho {
+    padding: 1px 0 1px 16px;
+    display: block;
+}
+
+.arvore_grupos .item_grupo_pai { background: url(../imgs/grupo_pai.png) 0 0 no-repeat; }
+.arvore_grupos li.expandable .item_grupo_pai { background: url(../imgs/grupo_pai.png) 0 0 no-repeat; }
+.arvore_grupos .item_grupo_filho { background: url(../imgs/grupo_filho.png) 0 0 no-repeat; }
