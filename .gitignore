@@ -7,6 +7,7 @@
 /webservice/imp/*.txt
 /credenciamento
 /credenciamento-fiscalizacao
+/senha/lib/php/core/Config.php
 sql.txt
 traduzir_arquivo
 traduzir_arquivo.php
