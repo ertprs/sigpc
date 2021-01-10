@@ -8,6 +8,7 @@
 /credenciamento
 /credenciamento-fiscalizacao
 /senha/lib/php/core/Config.php
+/senha/integracao/globalVars.php
 sql.txt
 traduzir_arquivo
 traduzir_arquivo.php
