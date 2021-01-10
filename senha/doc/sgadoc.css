@@ -1,0 +1,50 @@
+
+
+
+@import url( html4css1.css );
+
+body {
+    padding: 0px;
+    background-color: #dedede;
+
+    font-family: helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.document {
+    padding: 2em;
+    background-color: white;
+    
+}
+
+h1.title {
+    padding: 0.5em;
+    background-color: #dedede;
+    border: solid 2px #aaaaaa;
+}
+
+h1 {
+    border-bottom: solid 2px #aaaaaa;
+}
+p{
+	text-align: justify;
+}
+p.legenda{
+	text-align: center;
+	font-size: 80%;
+}
+p.topic{
+	font-size:large;
+	text-decoration: underline;
+	font-weight: bold;
+}
+img.border{
+	border: 1px solid;
+}
+img.max-width{
+	width: 700px;
+	border: 1px solid;
+}
+#img {
+	text-align: center;
+}

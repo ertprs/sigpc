@@ -1,0 +1,30 @@
+abr 02, 2020 4:17:21 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Iniciando Controlador de Paineis
+abr 02, 2020 4:17:21 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Carregando Configurações
+abr 02, 2020 4:17:21 PM br.gov.dataprev.controladorpainel.ConfigManager <init>
+INFORMAÇÕES: Agendando primeira tarefa de limpeza para Thu Apr 02 23:50:00 BRT 2020 com repetição a cada 24 horas
+abr 02, 2020 4:17:21 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Carregando Gerenciador de Conexões SQL...
+abr 02, 2020 4:17:21 PM com.mchange.v2.log.MLog <clinit>
+INFORMAÇÕES: MLog clients using java 1.4+ standard logging.
+abr 02, 2020 4:17:22 PM com.mchange.v2.c3p0.C3P0Registry banner
+INFORMAÇÕES: Initializing c3p0-0.9.1.2 [built 21-May-2007 15:04:56; debug? true; trace: 10]
+abr 02, 2020 4:17:23 PM com.mchange.v2.c3p0.impl.AbstractPoolBackedDataSource getPoolManager
+INFORMAÇÕES: Initializing c3p0 pool... com.mchange.v2.c3p0.ComboPooledDataSource [ acquireIncrement -> 5, acquireRetryAttempts -> 0, acquireRetryDelay -> 10, autoCommitOnClose -> true, automaticTestTable -> C3P0TestTable, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, dataSourceName -> 1hge0w2a9gql0r31r9zqm2|15380c2, debugUnreturnedConnectionStackTraces -> false, description -> null, driverClass -> com.mysql.jdbc.Driver, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge0w2a9gql0r31r9zqm2|15380c2, idleConnectionTestPeriod -> 15, initialPoolSize -> 10, jdbcUrl -> jdbc:mysql://172.16.250.40:3306/axlsenha, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 0, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 50, maxStatements -> 0, maxStatementsPerConnection -> 20, minPoolSize -> 10, numHelperThreads -> 3, numThreadsAwaitingCheckoutDefaultUser -> 0, preferredTestQuery -> null, properties -> {user=******, password=******}, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false ]
+abr 02, 2020 4:17:24 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Carregando Controlador de Paineis...
+abr 02, 2020 4:17:24 PM br.gov.dataprev.controladorpainel.GerenciadorPaineis <init>
+INFORMAÇÕES: Carregando paineis a partir do banco
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.GerenciadorPaineis cadastrarPainel
+INFORMAÇÕES: Painel cadastrado: [Painel: 0.0.0.1:8888 - Servico: (]
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.GerenciadorPaineis carregarPaineisDoBanco
+INFORMAÇÕES: 1 painei(s) carregado(s).
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Iniciando servidor UDP
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.server.UDPSimpleListener start
+INFORMAÇÕES: Starting UDPSimpleServer
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Carregando Processador de senhas
+abr 02, 2020 4:17:26 PM br.gov.dataprev.controladorpainel.ControladorPainel main
+INFORMAÇÕES: Servidor pronto
