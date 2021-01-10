@@ -6,3 +6,4 @@
 /tradutor
 /cron/TIME
 /webservice/imp/*.txt
+/webservice/imp/scan.php
