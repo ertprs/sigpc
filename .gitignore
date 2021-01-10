@@ -5,5 +5,4 @@
 /senha
 /tradutor
 /cron/TIME
-/webservice/imp/**/*.txt
-/webservice/imp/DESKTOP-MMP87OE.txt
+/webservice/imp/*.txt
