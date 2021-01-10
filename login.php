@@ -1,5 +1,5 @@
 <?php // Breno Cruvinel - breno.cruvinel09@gmail.com
-//INCLUDES DE CONTROLEasdasd
+
 include "config/globalSession.php";//inicia sessao php
 include "config/globalVars.php";//vars padrao
 include "sys/langAction.php";//inicia arquivo de linguage
