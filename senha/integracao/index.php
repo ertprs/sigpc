@@ -20,7 +20,7 @@ $classe_db->AbreConexaoPai();//Abrimos a conexão Pai
 
 
 //FUNÇÃO QUE MONTA RETORNO DOS DADOS
-function fWS_retDados($DADOS,$CONT_GET,$CONT_SEND){
+function fWS_retDados($DADOS){
 	//monta array monta json encode
 	$ret = json_encode($DADOS);
 
