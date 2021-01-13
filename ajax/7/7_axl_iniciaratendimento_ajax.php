@@ -993,7 +993,7 @@ if($ajax == "listaServicos"){
 	
 	if(isset($_GET["msg"])){
 		$cMSG->addMSG("ERRO",getpost_sql($_GET["msg"]));
-		$cMSG->imprimirMSG();
+		$cMSG->imprimirMSG("",20000);
 	}//if(isset($_GET["msg"])){
 
 
@@ -2007,13 +2007,13 @@ if($id_a != "0"){
 				$code_a = $linhaxxx["code"];
 				
 				$cMSG->addMSG("INFO",$class_fLNG->txt(__FILE__,__LINE__,'O candidato possui processo em aberto (!!sigla!! !!code!!)',array("sigla"=>SYS_CONFIG_RM_SIGLA,"code"=>$code_a)));
-				$cMSG->imprimirMSG();//imprimir mensagens criadas
+				$cMSG->imprimirMSG("",20000);//imprimir mensagens criadas
 			}
 			
 			fSQL::SQL_UPDATE_SIMPLES("candidato_fisico_id,code","axl_triagem",array($candidato_fisico_id_a,$code_a),"id = '$id_a'");
 		}else{//if($linhaxxx["id"] >= "1"){
 			$cMSG->addMSG("ERRO",$class_fLNG->txt(__FILE__,__LINE__,'Nenhum candidato encontrado com este !!sigla!! !!code!!',array("sigla"=>SYS_CONFIG_RM_SIGLA,"code"=>$candidato_code)));
-			$cMSG->imprimirMSG();//imprimir mensagens criadas
+			$cMSG->imprimirMSG("",20000);//imprimir mensagens criadas
 		}//}else{//if($linhaxxx["id"] >= "1"){
 	}//if(isset($_GET["novoCandidato"])){
 	
@@ -3331,7 +3331,7 @@ $(document).ready(function(e) {
 		if(isset($_GET["POP"])){ exit(0); }
 	}//verificado a existencia de erros ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !ERRO !
 
-	$cMSG->imprimirMSG();//imprimir mensagens criadas		
+	$cMSG->imprimirMSG("",20000);//imprimir mensagens criadas		
 	
 	if($valida == ""){
 		
@@ -3547,12 +3547,12 @@ $(document).ready(function(e) {
 	$formCadastroSec = "formCadastroSec".$array_temp;		
 	
 //MOSTRAR TODAS AS MENSAGENS CRIADAS -------------------------- CLASSE MENSAGENS ----------------------- ||||||||||||||
-$cMSG->imprimirMSG();//imprimir mensagens criadas			
+$cMSG->imprimirMSG("",20000);//imprimir mensagens criadas			
 
 	
 	if(isset($_GET["msg"])){
 		$cMSG->addMSG("INFO",getpost_sql($_GET["msg"]));
-		$cMSG->imprimirMSG();//imprimir mensagens criadas	
+		$cMSG->imprimirMSG("",20000);//imprimir mensagens criadas	
 	}//if(isset($_GET["msg"])){
 
 if($code_a != ""){
