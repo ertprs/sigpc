@@ -1,6 +1,6 @@
 <?php // Breno Cruvinel - breno.cruvinel09@gmail.com
 //INCLUDES DE CONTROLE --->>>
-include "../config/globalSession.php";//inicia sessao php
+include "../config/globalSession.php";//inicia sessao ph
 include "../config/globalVars.php";//vars padrao
 include "../sys/langAction.php";//inicia arquivo de linguage	
 include "../sys/globalFunctions.php";//funcoes padrao
