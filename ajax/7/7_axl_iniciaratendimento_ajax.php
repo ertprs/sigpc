@@ -1015,7 +1015,7 @@ while($linha = fSQL::FETCH_ASSOC($resu)){
 	$desabilitar = $linha["desabilitar"];
 ?>
         	<li class="<?php if($desabilitar <= "0"){ echo 'blue'; }else{ echo 'lightgrey'; }?> long">
-            	<a href="#" onclick="<?php if($desabilitar <= "0"){?>listaServicos<?=$INC_FAISHER["div"]?>('&novo=<?=$servico?>&candidato_fisico');return false;<?php }?>"><span><i class="icon-plus-sign"></i></span><span class="name"><b><?=$nome?></b></span></a>
+            	<a href="#" onclick='<?php if($desabilitar <= "0"){?>listaServicos<?=$INC_FAISHER["div"]?>("&novo=<?=$servico?>&candidato_fisico");return false;<?php }?>'><span><i class="icon-plus-sign"></i></span><span class="name"><b><?=$nome?></b></span></a>
             </li>
 <?php
 }//while($linha = fSQL::FETCH_ASSOC($resu)){
@@ -1055,13 +1055,13 @@ while($linha = fSQL::FETCH_ASSOC($resu)){
 			$qtd = fSQL::SQL_CONTAGEM("axl_processo",$condicao." AND servico_id = '".$novo."'");
 			if($qtd >= "1"){
 				$msg = $class_fLNG->txt(__FILE__,__LINE__,'Este candidato já possui tombamento em processo/ativo. Verifique o histórico!');
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){
 			$qtd = fSQL::SQL_CONTAGEM("axl_processo",$condicao." AND (servico_id = '14' OR servico_id = '15')");
 			if($qtd >= "1"){
 				$msg = $class_fLNG->txt(__FILE__,__LINE__,'O candidato já possui habilitação ou está em processo. Verifique o histórico!');
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){				
 		}//if($novo == "13"){
@@ -1072,21 +1072,21 @@ while($linha = fSQL::FETCH_ASSOC($resu)){
 			$qtd = fSQL::SQL_CONTAGEM("axl_processo",$condicao." AND servico_id = '13' AND status >= '0' AND status <= '5'");
 			if($qtd >= "1"){
 				$msg = $class_fLNG->txt(__FILE__,__LINE__,'O candidato já possui um tombamento em atendimento/ativo.<br>Verifique o histórico!');
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){
 			//se tiver habilitações ativas
 			$qtd = fSQL::SQL_CONTAGEM("axl_processo",$condicao." AND (servico_id = '".$novo."' OR servico_id = '15') AND status >= '0' AND status <= '5'");
 			if($qtd >= "1"){
 				$msg = $class_fLNG->txt(__FILE__,__LINE__,'O candidato já possui uma habilitação em processo/ativa.<br>Verifique se é mudança/adição de categoria!');
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){
 			//se tiver processos suspensos
 			$qtd = fSQL::SQL_CONTAGEM("axl_processo",$condicao." AND (servico_id = '".$novo."' OR servico_id = '13') AND status = '10'");
 			if($qtd >= "1"){
 				$msg = $class_fLNG->txt(__FILE__,__LINE__,'As permissões do candidato estão suspenas.<br>Verifique com auditores!');
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){				
 		}//if($novo == "13"){
@@ -1100,7 +1100,7 @@ while($linha = fSQL::FETCH_ASSOC($resu)){
 				if($novo == "15"){ $msg = $class_fLNG->txt(__FILE__,__LINE__,'Para solicitar 2º via, o candidato deve possuir tombamento ou habilitação ativa!<br>No momento, o candidato não possui nenhuma das permissões citadas acima!'); }else{
 					$msg = $class_fLNG->txt(__FILE__,__LINE__,'Para solicitar PID, deve possuir tombamento ou habilitação ativa!<br>No momento, o candidato não possui nenhuma das permissões citadas acima!');
 				}
-				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'(\'&msg='.$msg.'\'); return false;});</script>';
+				echo '<script>$(document).ready(function(){ listaServicos'.$INC_FAISHER["div"].'("&msg='.$msg.'"); return false;});</script>';
 				exit(0);
 			}//if($qtd_tombamento >= "1"){
 		}//if($novo == "15" || $novo == "19"){						
@@ -2260,7 +2260,7 @@ include "inc/inc_js-exclusivo.php";
 
 <?php if($candidato_fisico_id_a >= "1" and $motivo_id <= "0"){?>
 <script>
-$.doTimeout('vTimerLoadServicos<?=$INC_FAISHER["div"]?>', 100, function(){ listaServicos<?=$INC_FAISHER["div"]?>('<?php if($code_a != ""){ echo '&code='.$code_a; }?>'); });//TIMER
+$.doTimeout('vTimerLoadServicos<?=$INC_FAISHER["div"]?>', 100, function(){ listaServicos<?=$INC_FAISHER["div"]?>("<?php if($code_a != ""){ echo '&code='.$code_a; }?>"); });//TIMER
 
 function listaServicos<?=$INC_FAISHER["div"]?>(v_get){
 <?php if($tipo_pessoa_a == "fisico"){ $get = "candidato_fisico_id=".$candidato_fisico_id_a; }else{ $get = "candidato_juridico_id=".$candidato_juridico_id_a; }?>
