@@ -4778,7 +4778,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		fSMS_ECASH::send($msg, $linha["celular"]);
 	}//if($linha["celular"] != ""){
 
-	/*
+	
 	$linha = fSQL::SQL_SELECT_ONE("id,email","cad_candidato_fisico_email","candidato_fisico_id = '".$id_a."' AND principal = '1'");
 	if($linha["id"] >= "1"){
 		$email = $linha["email"];
@@ -4795,8 +4795,8 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'RNT').":</b> ".$arrCandidato["code"];		
 		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Nome')."</b>: ".$arrCandidato["nome"];
 		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Sobrenome')."</b>: ".$arrCandidato["sobrenome"];
-		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Sexo').": ".legSexo($arrCandidato["sexo"]);
-		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Data de nascimento').": ".data_mysql($arrCandidato["datan"]);
+		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Sexo')."</b>: ".legSexo($arrCandidato["sexo"]);
+		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Data de nascimento')."</b>: ".data_mysql($arrCandidato["datan"]);
 		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Grupo sanguíneo')."</b>: ".$arrCandidato["grupo_sanguineo"];
 		$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Nome da mãe')."</b>: ".$arrCandidato["mae"];
 		if($arrCandidato["pai"] != ""){ $notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Nome do pai')."</b>: ".$arrCandidato["pai"]; }
@@ -4805,12 +4805,12 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		
 		if($arrCandidato["id_estrangeiro"] != ""){
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')."</b>: ".$arrCandidato["id_estrangeiro"];
-			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro Dt. Validade / emissor').": ".data_mysql($arrCandidato["id_estrangeiro_data"])." ".$arrCandidato["id_estrangeiro_emissor"];
+			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro Dt. Validade / emissor')."</b>: ".data_mysql($arrCandidato["id_estrangeiro_data"])." ".$arrCandidato["id_estrangeiro_emissor"];
 		}//if($arrCandidato["id_estrangeiro"] != ""){
 			
 		if($arrCandidato["rg"] != ""){
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Identidade')."</b>: ".$arrCandidato["rg"];
-			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Identidade data emissão').": ".data_mysql($arrCandidato["rg_data"]);
+			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Identidade data emissão')."</b>: ".data_mysql($arrCandidato["rg_data"]);
 			if($arrCandidato["rg_orgao"] != ""){
 				$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Orgão emissor')."</b>: ".$arrCandidato["rg_orgao"];
 			}//if($arrCandidato["rg_orgao"] != ""){
@@ -4818,7 +4818,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		
 		if($arrCandidato["passaporte"] != ""){
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')."</b>: ".$arrCandidato["passaporte"];
-			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Passaporte data validade / país').": ".data_mysql($arrCandidato["passaporte_data"])." ".$arrCandidato["passaporte_pais"];
+			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Passaporte data validade / país')."</b>: ".data_mysql($arrCandidato["passaporte_data"])." ".$arrCandidato["passaporte_pais"];
 		}//if($arrCandidato["passaporte"] != ""){
 			
 		if($arrCandidato["outro_doc_nome"] != ""){
@@ -4861,7 +4861,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		$contentResp = file_get_contents(SYS_URLRAIZ.'sys/http_send_email.php?JesusTeAma=1', false, $context);
 				
 	}//if($linha["id"] >= "1"){
-	*/
+	
 
 }else{  //############# ELSE - ALTERA REGISTRO |-
 
