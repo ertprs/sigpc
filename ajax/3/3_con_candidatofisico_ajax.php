@@ -4212,6 +4212,18 @@ if(isset($_POST["id_a"])){
 	if($bairro_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Setor não pode estar vazio, preencha corretamente!');//msg
 	}//fim if valida campo	
+	$verificaRegistro = "0";//reabre form
+?>
+		<script>
+			//TIMER
+			$.doTimeout('vTimerOPENList', 500, function(){
+				exibMensagem('formPrincipalMSG<?=$INC_FAISHER["div"].$array_temp?>','erro',"<i class='icon-ban-circle'></i> <b><?=$class_fLNG->txt(__FILE__,__LINE__,'Erros encontrados!')?></b><br><?=$verifica_erro?>",60000);
+				<?php if(isset($_GET["POP"])){ ?>$("#pModalConteudo").scrollTop(0);<?php }?>
+				<?php if(!isset($_GET["POP"])){ ?>displayAcao<?=$INC_FAISHER["div"]?>('abreHtml');<?php }//fim else if(isset($_GET["POP"])){ ?>
+			});//TIMER
+		</script>
+		<?php	
+	
 	//valida campo referencia_a -- XXX
 	if($referencia_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Referência não pode estar vazio, preencha corretamente!');//msg
@@ -4277,10 +4289,10 @@ if(isset($_POST["id_a"])){
 	if($valida == "0"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
 	}
-	
+
 	if($verifica_erro == ""){
 		//verifica se já existe no sistem
-		$sql_complemto = " data_nascimento = '".data_mysql($datan_a)."'";	
+		$sql_complemto = " data_nascimento = '".$datan_a."'";	
 		if($id_a >= "1"){ 
 			$sql_complemto = " AND id != '$id_a'"; 
 		}//if($id_a >= "1"){ 
@@ -4294,7 +4306,8 @@ if(isset($_POST["id_a"])){
 		} else if ($id_estrangeiro_a != "") {
 			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
 			$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
-		}						
+		}			
+		$verifica_erro .= '- '.$sql_complemto;
 		$cont_ = "0";
 		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
 		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
