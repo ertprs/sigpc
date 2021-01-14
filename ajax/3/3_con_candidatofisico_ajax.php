@@ -4222,7 +4222,9 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Comprovante de endereço é obrigatório!');//msg
 	}//fim if valida campo			
 	*/
-	
+	if($mae_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Informe o nome da mãe, não pode estar vazio, preencha corretamente!');//msg
+	}//fim if valida campo	
 	
 	$valida = "0";
 	if($rg_a != ""){ $valida = "1"; 
@@ -4278,10 +4280,23 @@ if(isset($_POST["id_a"])){
 	
 	if($verifica_erro == ""){
 		//verifica se já existe no sistem
-		$sql_complemto = " AND id != '$id_a'";	
-		if($id_a == "0"){ $sql_complemto = ""; }//if($id_a == "0"){
+		$sql_complemto = " data_nascimento = '".data_mysql($datan_a)."'";	
+		if($id_a >= "1"){ 
+			$sql_complemto = " AND id != '$id_a'"; 
+		}//if($id_a >= "1"){ 
+		
+		if ($rg_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " rg = '".$rg_a."'";
+		} else if ($passaporte_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " passaporte = '".$passaporte_a."'";
+		} else if ($id_estrangeiro_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
+		}						
 		$cont_ = "0";
-		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", "(rg = '$rg_a' OR passaporte = '$passaporte_a' OR id_estrangeiro = '$id_estrangeiro_a' OR outro_doc_numero = '$outro_doc_numero_a') $sql_complemto", "");
+		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
 		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
 			$nome_aa = $linha1["nome"];
 			$cont_++;
@@ -4290,12 +4305,25 @@ if(isset($_POST["id_a"])){
 			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
 		}//fim if valida campo
 	}
-	//valida campo mae_a -- XXX
-	if(!isset($_GET["POP"])){
-		if($mae_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Informe o nome da mãe, não pode estar vazio, preencha corretamente!');//msg
+	
+	if($verifica_erro == ""){
+		//verifica se já existe no sistem
+		$sql_complemto = " data_nascimento = '".data_mysql($datan_a)."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
+		if($id_a >= "1"){ 
+			$sql_complemto = " AND id != '$id_a'"; 
+		}//if($id_a >= "1"){ 
+		
+		$cont_ = "0";
+		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
+		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
+			$nome_aa = $linha1["nome"];
+			$cont_++;
+		}//fim while
+		if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
 		}//fim if valida campo
-	}//if(!isset($_GET["POP"])){
+	}	
+	//valida campo mae_a -- XXX
 
 
 	//monta array de tel_cont_a
