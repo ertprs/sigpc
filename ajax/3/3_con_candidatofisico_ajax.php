@@ -4290,52 +4290,48 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
 	}
 
-	if($verifica_erro == ""){
-		//verifica se já existe no sistem
-		$sql_complemto = " data_nascimento = '".$datan_a."'";	
-		if($id_a >= "1"){ 
-			$sql_complemto = " AND id != '$id_a'"; 
-		}//if($id_a >= "1"){ 
-		
-		if ($rg_a != "") {
-			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-			$sql_complemto .= " rg = '".$rg_a."'";
-		} else if ($passaporte_a != "") {
-			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-			$sql_complemto .= " passaporte = '".$passaporte_a."'";
-		} else if ($id_estrangeiro_a != "") {
-			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-			$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
-		}			
-		$verifica_erro .= '- '.$sql_complemto;
-		$cont_ = "0";
-		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
-		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
-			$nome_aa = $linha1["nome"];
-			$cont_++;
-		}//fim while
-		if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
-		}//fim if valida campo
-	}
+	//verifica se já existe no sistem
+	$sql_complemto = " datan = '".$datan_a."'";	
+	if($id_a >= "1"){ 
+		$sql_complemto = " AND id != '$id_a'"; 
+	}//if($id_a >= "1"){ 
 	
-	if($verifica_erro == ""){
-		//verifica se já existe no sistem
-		$sql_complemto = " data_nascimento = '".data_mysql($datan_a)."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
-		if($id_a >= "1"){ 
-			$sql_complemto = " AND id != '$id_a'"; 
-		}//if($id_a >= "1"){ 
-		
-		$cont_ = "0";
-		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
-		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
-			$nome_aa = $linha1["nome"];
-			$cont_++;
-		}//fim while
-		if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
-		}//fim if valida campo
-	}	
+	if ($rg_a != "") {
+		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+		$sql_complemto .= " rg = '".$rg_a."'";
+	} else if ($passaporte_a != "") {
+		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+		$sql_complemto .= " passaporte = '".$passaporte_a."'";
+	} else if ($id_estrangeiro_a != "") {
+		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+		$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
+	}			
+	$verifica_erro .= '- '.$sql_complemto;
+	$cont_ = "0";
+	$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
+	while($linha1 = fSQL::FETCH_ASSOC($resu1)){
+		$nome_aa = $linha1["nome"];
+		$cont_++;
+	}//fim while
+	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
+	}//fim if valida campo
+	
+	//verifica se já existe no sistem
+	$sql_complemto = " datan = '".$datan_a."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
+	if($id_a >= "1"){ 
+		$sql_complemto = " AND id != '$id_a'"; 
+	}//if($id_a >= "1"){ 
+	
+	$cont_ = "0";
+	$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
+	while($linha1 = fSQL::FETCH_ASSOC($resu1)){
+		$nome_aa = $linha1["nome"];
+		$cont_++;
+	}//fim while
+	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
+	}//fim if valida campo
 	//valida campo mae_a -- XXX
 
 
