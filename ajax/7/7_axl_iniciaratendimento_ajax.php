@@ -3525,7 +3525,7 @@ $(document).ready(function(e) {
 			imprimirRecibo<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
 		}
 		
-		imprimirProcessoCompleto("<?=$code_a?>");
+		imprimirProcessoFull<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
 	});
 });
 </script>
