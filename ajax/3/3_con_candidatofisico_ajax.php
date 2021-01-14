@@ -4213,16 +4213,8 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Setor não pode estar vazio, preencha corretamente!');//msg
 	}//fim if valida campo	
 	$verificaRegistro = "0";//reabre form
-?>
-		<script>
-			//TIMER
-			$.doTimeout('vTimerOPENList', 500, function(){
-				exibMensagem('formPrincipalMSG<?=$INC_FAISHER["div"].$array_temp?>','erro',"<i class='icon-ban-circle'></i> <b><?=$class_fLNG->txt(__FILE__,__LINE__,'Erros encontrados!')?></b><br><?=$verifica_erro?>",60000);
-				<?php if(isset($_GET["POP"])){ ?>$("#pModalConteudo").scrollTop(0);<?php }?>
-				<?php if(!isset($_GET["POP"])){ ?>displayAcao<?=$INC_FAISHER["div"]?>('abreHtml');<?php }//fim else if(isset($_GET["POP"])){ ?>
-			});//TIMER
-		</script>
-		<?php	
+
+
 	
 	//valida campo referencia_a -- XXX
 	if($referencia_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }

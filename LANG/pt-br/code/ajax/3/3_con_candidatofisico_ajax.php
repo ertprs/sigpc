@@ -1754,6 +1754,12 @@ $aLNG[
 
 //*************************************************************************************************************************************************************
 $aLNG[
+'Informe o nome da mãe, não pode estar vazio, preencha corretamente!'
+] = 
+'Informe o nome da mãe, não pode estar vazio, preencha corretamente!'; 
+
+//*************************************************************************************************************************************************************
+$aLNG[
 'Campo ID Data emissão não pode estar vazio, preencha corretamente!'
 ] = 
 'Campo ID Data emissão não pode estar vazio, preencha corretamente!'; 
@@ -1820,9 +1826,9 @@ $aLNG[
 
 //*************************************************************************************************************************************************************
 $aLNG[
-'Informe o nome da mãe, não pode estar vazio, preencha corretamente!'
+'Já existe um candidato $nome_aa cadastrado, verifique!'
 ] = 
-'Informe o nome da mãe, não pode estar vazio, preencha corretamente!'; 
+'Já existe um candidato $nome_aa cadastrado, verifique!'; 
 
 //*************************************************************************************************************************************************************
 $aLNG[
