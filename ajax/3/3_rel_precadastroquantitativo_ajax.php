@@ -220,6 +220,597 @@ $(document).ready(function(){
 
 
 
+
+
+
+
+
+
+
+
+if($ajax == "detalhesProcesso"){
+	$id_a = $_GET["id"];
+	
+	$linha = fSQL::SQL_SELECT_ONE("*","axl_processo","id = '".$id_a."'");
+	$ano = $linha["ano"];
+	$mes = $linha["mes"];	
+	$dia = $linha["dia"];
+	$code = $linha["code"];	
+	$candidato_fisico_id_a = $linha["candidato_fisico_id"];
+	$pgto_id_a = $linha["pgto_id"];
+	$tipo_servico_a = $linha["tipo_servico"];	
+	$origem_id_a = $linha["origem_id"];	
+	$servico_id_a = $linha["servico_id"];
+	$time_a = $linha["time"];
+	$user_a = $linha["user"];
+	$status_a = $linha["status"];		
+	$coleta_id_a = $linha["coleta_id"];		
+	$coleta_time_a = $linha["coleta_time"];		
+	$emissao_time_a = $linha["emissao_time"];		
+	$entrega_data_a = $linha["entrega_data"];			
+	$motivo_id_a = $linha["motivo_id"];
+	$obs_geral_a = $linha["obs_geral"];	
+	$validade_time_a = $linha["validade_time"];				
+	$validade_anos_a = $linha["validade_anos"];					
+	$cancelamento_suspensao_id_a = $linha["cancelamento_suspensao_id"];	
+
+	$processo_dir = VAR_DIR_FILES."files/tabelas/axl_processo/".$ano."/".completa_zero($mes,"2")."/".completa_zero($dia,"2")."/".$code."/";
+	
+
+
+
+	//verificação de cancelamento/suspensão
+	if(isset($_GET["acao"])){
+		$array_temp = getpost_sql($_GET["array_temp"]);
+		$acao = getpost_sql($_GET["acao"]);
+		$motivo = getpost_sql($_GET["motivo"]);
+		$motivo_descricao = getpost_sql($_GET["motivo_descricao"]);		
+		$data_p = getpost_sql($_GET["data_p"]);		
+		$data_c = getpost_sql($_GET["data_c"], "DATA");
+
+		if($acao == "1"){//suspensão
+			if($data_p != ""){ $data_p = data_mysql($data_p); $data_p = strtotime($data_p." 23:59"); }else{ $data_p = "99999999"; } 
+		}//if($acao == "1"){//suspensão
+		if($data_c != ""){ $data_c = strtotime($data_c." 23:59"); }else{ $data_c = "99999999"; }
+		//echo "<pre>"; print_r($_GET); echo "</pre>";
+		
+		$cancelamento_suspensao_id_a = fSQL::SQL_SELECT_INSERT("axl_cancelamento_suspensao");
+		$campos = "id,processo_id,acao,candidato_id,status,motivo,motivo_descricao,data_p,data_c,user,time,user_a,sync";
+		$valores = array($cancelamento_suspensao_id_a,$id_a,$acao,$candidato_fisico_id_a,"0",$motivo,$motivo_descricao,$data_p,$data_c,$cVLogin->userReg(),time(),"0",time());
+		fSQL::SQL_INSERT_SIMPLES($campos,"axl_cancelamento_suspensao",$valores);
+		
+		fSQL::SQL_UPDATE_SIMPLES("cancelamento_suspensao_id","axl_processo",array($cancelamento_suspensao_id_a),"id = '".$id_a."'");
+		
+		$upload_dir_temp = VAR_DIR_FILES."files/temp/";
+		$campos = "id,titulo,nome,arquivo";
+		$tabela = "sys_arquivos_temp";
+		$where = "acao = '".$array_temp."' AND form = 'oficio".$array_temp."' AND usuarios_id = '".$cVLogin->getVarLogin("SYS_USER_ID")."'";
+		//SQL_SELECT_SIMPLES($campos, $tabela, $where='', $order='')
+		$resu1 = fSQL::SQL_SELECT_SIMPLES($campos, $tabela, $where, "");
+		while($linha = fSQL::FETCH_ASSOC($resu1)){
+			$id_e = $linha["id"];
+			$titulo_e = $linha["titulo"];
+			$nome_e = $linha["nome"];
+			$arquivo_e = $linha["arquivo"];
+			if(file_exists($upload_dir_temp.$arquivo_e)){
+				
+				$upload_dir = $processo_dir."cancelamento_suspensao/"; $cria = fGERAL::criaPasta($upload_dir, "0775"); //confere a criação e retona 1			
+				fSQL::SQL_UPDATE_SIMPLES("oficio","axl_cancelamento_suspensao",array($arquivo_e),"id = '".$cancelamento_suspensao_id_a."'");
+				//move o arquivo para o novo local e exclue o temp
+				rename($upload_dir_temp.$arquivo_e, $upload_dir.$arquivo_e);
+				//exclue o registro
+				$tabela = "sys_arquivos_temp";
+				fSQL::SQL_DELETE_SIMPLES($tabela, "id = '$id_e'");
+			}//fim if(file_exists($upload_dir_temp.$arquivo_e)){
+		}//fim while		
+		
+		fPROCESSO::criarEvento($class_fLNG->txt(__FILE__,__LINE__,'Solicitação de !!tipo!!',array("tipo"=>acaoProcessoLeg($acao))),$class_fLNG->txt(__FILE__,__LINE__,'Solicitação de !!tipo!!',array("tipo"=>acaoProcessoLeg($acao))),$cVLogin->userReg(),$cVLogin->getVarLogin("SYS_USER_CARGO"),$id_a,$processo_dir);
+		
+		$cMSG->addMSG("INFO",$class_fLNG->txt(__FILE__,__LINE__,'Solicitação de !!tipo!! realizado com sucesso',array("tipo"=>acaoProcessoLeg($acao))));	
+	}//if(isset($_GET["acao"])){
+
+
+	if($coleta_id_a >= "1"){
+		$linha = fSQL::SQL_SELECT_ONE("abis_status,abis_status_acao","axl_coleta_biometrica","id = '".$coleta_id_a."' AND origem_id = '".$origem_id_a."'");
+		$coleta_abis_status = $linha["abis_status"];	
+		$coleta_abis_status_acao = $linha["abis_status_acao"];		
+	}//if($coleta_id_a >= "1"){
+	
+	$linha2 = fSQL::SQL_SELECT_ONE("code,nome,sobrenome,datan,nacionalidade,grupo_sanguineo,suspensao_i,suspensao_f,sync","cad_candidato_fisico","id = '$candidato_fisico_id_a'");
+	$pessoa_n = "<span class='display-plus'>".$cVLogin->popDetalhes("C",$candidato_fisico_id_a,"3_con_candidatofisico","".$class_fLNG->txt(__FILE__,__LINE__,'DETALHES DO CANDIDATO')).SYS_CONFIG_RM_SIGLA." ".fGERAL::legCode($candidato_fisico_id_a,$linha2["code"])." - <b>".$linha2["nome"]."</b><br>".'<div style="clear:both; border-top:#E0E0E0 1px solid;"></div>'."</span>";
+	$pessoa_n .= $class_fLNG->txt(__FILE__,__LINE__,'Sobrenome').": <b>".$linha2["sobrenome"]."</b>";			
+	$pessoa_n .= "<br>".$class_fLNG->txt(__FILE__,__LINE__,'Data de nascimento').": <b>".data_mysql($linha2["datan"]).", ".calcular_idade($linha2["datan"])." anos</b>";			
+	$pessoa_n .= "<br>".$class_fLNG->txt(__FILE__,__LINE__,'Nacionalidade').": <b>".maiusculo($linha2["nacionalidade"])."</b>";
+	$pessoa_n .= "<br>".$class_fLNG->txt(__FILE__,__LINE__,'Grupo Sanguineo').": <b>".$linha2["grupo_sanguineo"]."</b>";						
+	if($linha2["suspensao_i"] >= "1"){
+		$dataf = date("d/m/Y",$linha2["suspensao_f"]);
+		if($linha2["suspensao_f"] == "99999999"){ $dataf = $class_fLNG->txt(__FILE__,__LINE__,'indeterminado'); }
+		$pessoa_n .= "<br><span style='color:red;'>".$class_fLNG->txt(__FILE__,__LINE__,'Suspenso de !!datai!! até !!dataf!!',array("datai"=>date("d/m/Y",$linha2["suspenso_i"]),"dataf"=>$dataf)).": <b>".$linha2["grupo_sanguineo"]."</b>";						
+	}//if($linha2["suspensao_i"] >= "1"){
+	
+	
+	$pgto_id_n = "";
+	if($pgto_id_a >= "1"){
+		$linha2 = fSQL::SQL_SELECT_ONE("cod_banco,numero,valor,time_deposito","axl_pgto_banco","id = '$pgto_id_a'");
+		$pgto_id_n = $class_fLNG->txt(__FILE__,__LINE__,'Banco').": ".legBanco($linha2["cod_banco"]);
+		$pgto_id_n .= "<br>".$class_fLNG->txt(__FILE__,__LINE__,'Nº pagamento')." ".$linha2["numero"]." - GNF $ ".formataValor($linha2["valor"]);		
+		$pgto_id_n .= "<br>".$class_fLNG->txt(__FILE__,__LINE__,'depósito realizado em !!data!!',array("data"=>date("d/m/Y H:i", $linha2["time_deposito"])));
+	}//if($pgto_id_a >= "1"){
+	
+	$linha2 = fSQL::SQL_SELECT_ONE("nome","sys_perfil","origem_id = '".$origem_id_a."'");
+	$origem_id_n = $linha2["nome"];
+	
+	//busca dados
+	$linha2 = fSQL::SQL_SELECT_ONE("nome,informacoes","adm_protocolo_tipo", "id = '".$servico_id_a."'");	
+	$servico_id_n = $linha2["nome"];	
+	$informacoes_i = arrayDB($linha2["informacoes"]);	
+	
+	$processo_n = "<div style='float:left;'><i style='font-size: 40px;' class='".categoriaServicoIco($tipo_servico_a)."'></i></div> ".maiusculo(categoriaServicoLeg($tipo_servico_a))." - ".$servico_id_n;	
+			
+	$status_n = processoStatusLeg($status_a);
+
+	$log_n = $class_fLNG->txt(__FILE__,__LINE__,'Processo iniciado em !!data!!, por !!user!!',array("data"=>date("d/m/Y H:i",$time_a),"user"=>$user_a));
+
+	$coleta_n = "";	if($coleta_time_a >= "1"){ $coleta_n = date("d/m/Y H:i",$coleta_time_a); }
+	$emissao_n = ""; if($emissao_time_a >= "1"){ $emissao_n = date("d/m/Y H:i",$emissao_time_a); }	
+	$validade_n = ""; if($validade_time_a >= "1"){ $validade_n = $class_fLNG->txt(__FILE__,__LINE__,'Válido por !!anos!! anos, vence em:',array("anos"=>$validade_anos_a))." ".date("d/m/Y",$validade_time_a); }	
+	$entrega_data_n = ""; if($entrega_data_a != "0000-00-00"){ $entrega_data_n = date("d/m/Y",strtotime($entrega_data_a)); }	
+	
+	//busca dados
+	$motivo_id_n = "";
+	if($motivo_id_a >= "1"){
+		$linha2 = fSQL::SQL_SELECT_ONE("etapa,descricao","axl_motivo_cancelamento", "id = '".$motivo_id_a."'");	
+		$motivo_id_n = legEtapaCancelamento($linha2["etapa"]);
+		if($linha2["descricao"] != ""){
+			$motivo_id_n .= " - ".$linha2["descricao"];
+		}
+	}//if($motivo_id_a >= "1"){
+
+	$arrColeta = array(); $coleta_dir = "";
+	if($coleta_id_a >= "1"){
+		$arrColeta = fSQL::SQL_SELECT_ONE("*","axl_coleta_biometrica","id = '".$coleta_id_a."'");
+		$coleta_dir = VAR_DIR_FILES."files/tabelas/coleta/".$arrColeta["ano"]."/".completa_zero($arrColeta["mes"],"2")."/".completa_zero($arrColeta["dia"],"2")."/".$coleta_id_a."/";	
+	}
+	//echo $coleta_dir;
+	
+	
+	
+	$eventosArray = fPROCESSO::getEventos($id_a,$processo_dir,"0","","30");//getEventos() - CARREGA ARRAY DE EVENTOS	
+		
+	$cMSG->imprimirMSG();//imprimir mensagens criadas		
+	
+    //id temp para registro de array
+    $array_temp = time().rand(9,99999).$cVLogin->getVarLogin("SYS_USER_ID");
+	$formCadastroPincipal = "formCadastroPincipal".$array_temp;	
+?>
+<form class="form-horizontal form-bordered form-validate" onSubmit="return false;">
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Tipo processo')?></label>
+                <div class="controls display-plus">
+                  <?=$processo_n?>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Origem')?></label>
+                <div class="controls">
+                  <?=$origem_id_n?>
+                </div>
+            </div> 
+            <?php if($pgto_id_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Pagamento')?></label>
+                <div class="controls ">
+                  <?=$pgto_id_n?>
+                </div>
+            </div>    
+            <?php }//if($pgto_id_n != ""){?>   
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitante')?></label>
+                <div class="controls">
+                  <?=$pessoa_n?>
+                </div>
+            </div> 
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Status')?></label>
+                <div class="controls display-plus">
+                  <?=$status_n?>
+                </div>
+            </div> 
+            <?php if($motivo_id_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Motivo')?></label>
+                <div class="controls display-plus">
+                  <?=$motivo_id_n?>
+                </div>
+            </div> 
+            <?php }//if($coleta_n != ""){?>  
+            <?php if($obs_geral_a != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Observação geral')?></label>
+                <div class="controls display-plus">
+                  <?=$obs_geral_a?>
+                </div>
+            </div> 
+            <?php }//if($obs_geral_a != ""){?>  
+            <?php if($emissao_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Emissão')?></label>
+                <div class="controls">
+                  <?=$emissao_n?>
+                </div>
+            </div> 
+            <?php }//if($emissao_n != ""){?>    
+            <?php if($validade_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Validade')?></label>
+                <div class="controls">
+                  <?=$validade_n?>
+                </div>
+            </div> 
+            <?php }//if($validade_n != ""){?>                                    
+            <?php if($coleta_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Coleta biométrica')?></label>
+                <div class="controls">
+                  <?=$coleta_n?>
+                </div>
+            </div>                            
+            <?php }//if($coleta_n != ""){?>            
+            <?php if($emissao_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Emissão')?></label>
+                <div class="controls">
+                  <?=$emissao_n?>
+                </div>
+            </div>                            
+            <?php }//if($emissao_n != ""){?>                        
+            <?php if($entrega_data_n != ""){?>
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Entrega')?></label>
+                <div class="controls">
+                  <?=$entrega_data_n?>
+                </div>
+            </div>                            
+            <?php }//if($entrega_data_n != ""){?>                        
+            
+            <?php 
+			if($cancelamento_suspensao_id_a >= "1"){
+				$linhaxxx = fSQL::SQL_SELECT_ONE("id,acao,motivo,motivo_descricao,data_p,status,data_c,data_p,sync","axl_cancelamento_suspensao","id = '".$cancelamento_suspensao_id_a."'");
+				if($linhaxxx["status"] <= "1"){
+					$leg = motivoCancelamento($linhaxxx["motivo"]);
+					
+					if($linhaxxx["status"] == "0"){ $leg .= " (".$class_fLNG->txt(__FILE__,__LINE__,'Aguardando análise').")"; }
+					if($linhaxxx["status"] == "1"){ $leg .= " (".$class_fLNG->txt(__FILE__,__LINE__,'Solicitação aprovada').")"; }
+					
+					$leg .= '<a href="#" class="btn btn-default" onclick="pmodalHtml(\'<i class=icon-search></i> '.$class_fLNG->txt(__FILE__,__LINE__,'DETALHES DA SOLICITAÇÃO').'\',\''.$AJAX_PAG.'\',\'get\',\'faisher='.$faisher.'&ajax=detalhesAcao&id='.$linhaxxx["id"].'\');"> <i class="icon-external-link"></i></a>';
+					
+					if($linhaxxx["motivo_descricao"] != ""){ $leg .= "<br><small>".$linhaxxx["motivo_descricao"]."</small>"; }
+					if($linhaxxx["data_p"] >= "1"){
+						$dataf = date("d/m/Y",$linhaxxx["data_p"]);
+						if($linhaxxx["data_p"] == "99999999"){ $dataf = $class_fLNG->txt(__FILE__,__LINE__,'Indeterminado'); }
+						
+						if($linhaxxx["status"] == "1"){ 
+							$leg .= "<br><small>".$class_fLNG->txt(__FILE__,__LINE__,'!!tipo!! pelo período: de !!datai!! até !!dataf!!',array("tipo"=>acaoProcessoLeg($linhaxxx["acao"]),"datai"=>date("d/m/Y",$linhaxxx["sync"]),"dataf"=>$dataf))."</small>";
+						}else{//if($linhaxxx["status"] == "1"){
+							$leg .= "<br><small>".$class_fLNG->txt(__FILE__,__LINE__,'!!tipo!! pelo período: até !!dataf!!',array("tipo"=>acaoProcessoLeg($linhaxxx["acao"]),"dataf"=>$dataf))."</small>";
+						}//}else{//if($linhaxxx["status"] == "1"){
+					}//if($linhaxxx["data_p"] >= "1"){
+			?>
+            <div class="control-group">
+                <label class="control-label" style="color:red;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitação de !!tipo!!',array("tipo"=>acaoProcessoLeg($linhaxxx["acao"])))?></label>
+                <div class="controls">
+                  <?=$leg?>
+                </div>
+            </div>                            
+            <?php 
+				}//if($linhaxxx["status"] <= "1"){
+			}//if($cancelamento_suspensao_id_a >= "1"){
+			?>                                    
+            
+            <div class="control-group">
+                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Log')?></label>
+                <div class="controls">
+                  <?=$log_n?>
+                  <br>
+                  
+                    	<?php // BLOCO DE DADOS -----------------------accordion-widget--------------------------- >>>
+						$boxUI_status = "0";// 1 - aberto, 0 - fechado, off - desligado
+						$boxUI_rodape = "- ".$boxUI_titulo;//texto rodape
+						?>
+							<div class="accordion accordion-widget" id="ac_log">
+								<div class="accordion-group" style="margin-bottom:0;">
+									<div class="accordion-heading">
+										<a class="accordion-toggle collapsed" style="padding:3px !important;" data-toggle="collapse" data-parent="#ac_log" href="#acc_log" id="a_log" onclick="return false;">
+											<?=$class_fLNG->txt(__FILE__,__LINE__,'Detalhes')?>
+										</a>
+									</div>
+									<div id="acc_log" class="accordion-body collapse" style="height:0px;">
+										<div class="accordion-inner" style="padding:0;">                  
+								<table class="table table-hover table-nomargin table-bordered">
+									<thead>
+										<tr>
+											<th>Data/Hora</th>
+											<th>Evento</th>
+											<th>Descrição</th>
+											<th>Usuário</th>                                            
+										</tr>
+									</thead>
+									<tbody>
+<?php                                    
+$cont = "0";
+//monta array de dados
+$array = $eventosArray["lista"];
+$cont_ARRAY = ceil(count($array));
+if($cont_ARRAY >= "1"){
+	foreach($array as $pos => $valor){
+		if($valor != ""){
+			$cont++;                                                      
+?>
+										<tr>
+											<td><?=date('d/m/Y H:i',$valor["time"])?>h</td>
+											<td><?=$valor["evento"]?></td>
+											<td><?=$valor["descricao"]?></td>
+											<td><?=sentenca($valor["user"])?><br><?=$valor["cargo"]?></td>
+											
+										</tr>
+<?php 
+		}//if($valor != ""){
+	}//fim foreach
+}//fim if($cont_ARRAY >= "1"){
+?>             
+									</tbody>
+								</table>	
+                                        </div><!-- End .accordion-inner -->
+									</div>
+								</div>
+                            <a href="#" onclick="$('#a_log').click();return false;" class="btn btn-mini" style="margin-top:0;"><i class="icon-retweet"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Expandir/ocultar')?> - <?=$class_fLNG->txt(__FILE__,__LINE__,'Detalhes')?></a>
+							</div><!-- End .accordion-widget ----------------------------------------------- -->                                       
+                </div>
+            </div>          
+                    	<?php // BLOCO DE DADOS -----------------------accordion-widget--------------------------- >>>
+                        $boxUI_id = "dadosatend".$array_temp;//id de controle
+						$boxUI_titulo = $class_fLNG->txt(__FILE__,__LINE__,'DADOS DO ATENDIMENTO');// titulo
+						$boxUI_status = "0";// 1 - aberto, 0 - fechado, off - desligado
+						$boxUI_rodape = "- ".$boxUI_titulo;//texto rodape
+						?>
+							<div class="accordion accordion-widget" id="ac_<?=$boxUI_id?>">
+								<div class="accordion-group" style="margin-bottom:0;">
+									<div class="accordion-heading">
+										<a class="accordion-toggle collapsed" <?php if($boxUI_status != "off"){?>data-toggle="collapse" data-parent="#ac_<?=$boxUI_id?>"<?php }?> href="#acc_<?=$boxUI_id?>" id="a_<?=$boxUI_id?>" onclick="return false;">
+											<?=$boxUI_titulo?>
+										</a>
+									</div>
+									<div id="acc_<?=$boxUI_id?>" class="accordion-body collapse <?php if(($boxUI_status == "1") or ($boxUI_status == "off")){?> in" style="height: auto;"<?php }else{ echo '" style="height:0px;"';}?>>
+										<div class="accordion-inner" style="padding:0;">
+<?php
+		if($informacoes_i != ""){
+			//monta array
+			unset($array); $array = explode(".",$informacoes_i);
+			$cont_ARRAY = ceil(count($array));
+			//listar item ja cadastrados
+			if($cont_ARRAY >= "1"){
+				foreach ($array as $pos => $tipo_id){
+					if($tipo_id != ""){
+						//pegar info do campo
+						$linha = fSQL::SQL_SELECT_ONE("tipo_campo","adm_protocolo_tipo_inf","id = '".$tipo_id."'");
+						$tipo_campo = $linha["tipo_campo"];
+						
+						if($tipo_campo == "99"){//CAMPO DE CATEGORIA
+							$categorias = "";
+							$resu = fSQL::SQL_SELECT_SIMPLES("nome,valor","axl_processo_campos","processo_id = '".$id_a."' AND tipo_campo = '".$tipo_campo."'");
+							while($linha = fSQL::FETCH_ASSOC($resu)){
+								if($categorias != ""){ $categorias .= "<br>"; }
+								$categorias .= $linha["nome"];
+							}						
+?>
+                                            <div class="control-group">
+                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Categoria(s)')?></label>
+                                                <div class="controls">
+													<?=$categorias?>
+                                                </div>
+                                            </div> 
+<?php
+						}//if($tipo_id == "99"){//CAMPO DE CATEGORIA
+						
+						
+
+						if($tipo_campo == "1" || $tipo_campo == "3"){//inputs
+							$linha = fSQL::SQL_SELECT_ONE("nome,valor","axl_processo_campos","processo_id = '".$id_a."' AND tipo_campo = '".$tipo_campo."' AND tipo_id = '".$tipo_id."'");
+?>
+                                            <div class="control-group">
+                                                <label class="control-label"><?=sentenca($linha["nome"])?></label>
+                                                <div class="controls">
+													<?=$linha["valor"]?>
+                                                </div>
+                                            </div> 
+<?php
+						}//if($tipo_id == "99"){//CAMPO DE CATEGORIA	
+						
+						
+						
+						
+						
+						
+						if($tipo_campo == "80"){//restrições médicas
+							$linha = fSQL::SQL_SELECT_ONE("nome,valor","axl_processo_campos","processo_id = '".$id_a."' AND tipo_campo = '".$tipo_id."' AND tipo_id = '".$tipo_id."'");
+							$valor = $linha["valor"];
+							
+							$restricoes = "-";
+							$arr = explode(",",$valor);
+							foreach ($arr as $restricao_id){							
+								$linhaxxx = fSQL::SQL_SELECT_ONE("legenda","axl_restricoes_medicas","id = '".$restricao_id."'");
+								if($linhaxxx["legenda"] != ""){
+									if($restricoes != ""){ $restricoes .= "<br>"; }
+									$restricoes .= $linhaxxx["legenda"];
+								}
+							}//fim foreacah
+							
+?>
+                                            <div class="control-group">
+                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Restrições médicas')?></label>
+                                                <div class="controls">
+													<?=$restricoes?>
+                                                </div>
+                                            </div> 
+<?php
+						}//if($tipo_id == "99"){//CAMPO DE CATEGORIA													
+						
+						
+						
+						
+						
+						if($tipo_campo == "9"){//inputs
+							$cont = "0";
+							$linha = fSQL::SQL_SELECT_ONE("nome,valor","axl_processo_campos","processo_id = '".$id_a."' AND tipo_campo = '".$tipo_campo."' AND tipo_id = '".$tipo_id."'");							
+							if($linha["valor"] == ""){ continue; }
+							$caminho_file = $processo_dir."files/".$linha["valor"];
+							
+?>
+                                            <div class="control-group">
+                                                <label class="control-label"><?=sentenca($linha["nome"])?></label>
+                                                <div class="controls">
+													<a href="img.php?<?=$cVLogin->imgFile($caminho_file, "full")?>" rel="prettyPhoto[gallery<?=$cont?>]" id="iimg_<?=$cont?>"><?=$cVLogin->icoFile($caminho_file, "")?></a>
+                                                    <a href="#" onclick="$('#iimg_<?=$cont?>').click();return false;" class="btn" rel="tooltip" title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Visualizar')?>"><i class="icon-search"></i></a>
+                                                </div>
+                                            </div> 
+<?php
+						}//if($tipo_id == "99"){//CAMPO DE CATEGORIA							
+						
+?>									
+<?php
+					}//if($tipo_id != ""){
+				}//fim foreach
+			}//fim if($cont_ARRAY >= "1"){
+		}//if($informacoes_a != ""){	
+?>	
+                                        
+                                        </div><!-- End .accordion-inner -->
+									</div>
+								</div>
+                            <?php if($boxUI_status != "off"){?><a href="#" onclick="$('#a_<?=$boxUI_id?>').click();return false;" class="btn btn-mini" style="margin-top:0;"><i class="icon-retweet"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Expandir/ocultar')?> <?=$boxUI_rodape?></a><?php }?>
+							</div><!-- End .accordion-widget ----------------------------------------------- -->           
+                            
+                            
+                            
+                            
+<?php if($coleta_id_a >= "1"){?>
+                    	<?php // BLOCO DE DADOS -----------------------accordion-widget--------------------------- >>>
+                        $boxUI_id = "dadosbiometria".$array_temp;//id de controle
+						$boxUI_titulo = $class_fLNG->txt(__FILE__,__LINE__,'DADOS BIOMÉTRICOS');// titulo
+						$boxUI_status = "0";// 1 - aberto, 0 - fechado, off - desligado
+						$boxUI_rodape = "- ".$boxUI_titulo;//texto rodape
+						?>
+							<div class="accordion accordion-widget" id="ac_<?=$boxUI_id?>">
+								<div class="accordion-group" style="margin-bottom:0;">
+									<div class="accordion-heading">
+										<a class="accordion-toggle collapsed" <?php if($boxUI_status != "off"){?>data-toggle="collapse" data-parent="#ac_<?=$boxUI_id?>"<?php }?> href="#acc_<?=$boxUI_id?>" id="a_<?=$boxUI_id?>" onclick="return false;">
+											<?=$boxUI_titulo?>
+										</a>
+									</div>
+									<div id="acc_<?=$boxUI_id?>" class="accordion-body collapse <?php if(($boxUI_status == "1") or ($boxUI_status == "off")){?> in" style="height: auto;"<?php }else{ echo '" style="height:0px;"';}?>>
+										<div class="accordion-inner" style="padding:0;">                            
+
+<?php
+?>                                        
+                                        
+                                                    <table class="table table-hover table-nomargin table-bordered" style="border:1px black solid; border-bottom:0px;">
+                                                    	<thead>
+                                                        	<tr>
+                                                            	<th style="width:100px;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Foto')?></th>
+                                                            	<th><?=$class_fLNG->txt(__FILE__,__LINE__,'Dados')?></th>                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        	<tr>
+                                                            	<td style="text-align:center;">
+                                                                	<a href="img.php?<?=$cVLogin->imgFile($coleta_dir."foto.jpg", "full")?>" rel="prettyPhoto[gallery<?=$cont?>]" id="iimg_<?=$cont?>" title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Clique para expandir')?>"><?=$cVLogin->icoFile($coleta_dir."foto.jpg", "")?></a><br>
+                                                                	<a href="img.php?<?=$cVLogin->imgFile($coleta_dir."assinatura.jpg", "full")?>" rel="prettyPhoto[gallery<?=$cont?>]" id="iimg_<?=$cont?>" title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Clique para expandir')?>"><?=$cVLogin->icoFile($coleta_dir."assinatura.jpg", "")?></a>
+                                                                </td>
+																<td><?=$pessoa_n?></td>                                                               	                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-hover table-nomargin table-bordered" style="border:1px black solid; border-top:0px;">
+															<tr>
+                                                            	<td style="width:100px; border-right:red solid 1px;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Direito')?></td>
+												<?php 
+												for($posicao=1; $posicao <= 5; $posicao++){
+													$dedo_file = $coleta_dir."dedo".$posicao.".jpg";
+												?>
+																	<td style="text-align:center; padding:0px; margin:0px; border:red solid 1px; border-left:0px; cursor:pointer;"><span style="float:left; font-size:9px; padding-left:1px;"><?=$posicao?></span><span style="float:right; font-size:9px;padding-right:1px;"><?=$arrColeta["nfiq".$posicao]?></span><a href="img.php?<?=$cVLogin->imgFile($dedo_file, "full")?>" rel="prettyPhoto[gallery<?=$cont?>]" id="iimg_<?=$cont?>" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Clique para expandir')?>"><?=$cVLogin->icoFile($dedo_file, "")?></a><br><?=legDedo($posicao)?></td>
+												<?php }//for($posicao=1; $posicao <= 5; $posicao++){?>                                                
+                                                            </tr>
+															<tr>
+                                                            	<td style="width:100px; border-right:red solid 1px;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Esquerdo')?></td>
+                                                            	
+												<?php 
+												for($posicao=6; $posicao <= 10; $posicao++){
+													$dedo_file = $coleta_dir."dedo".$posicao.".jpg";
+												?>
+																	<td style="text-align:center; padding:0px; margin:0px; border:red solid 1px; border-left:0px; cursor:pointer;"><span style="float:left; font-size:9px; padding-left:1px;"><?=$posicao?></span><span style="float:right; font-size:9px;padding-right:1px;"><?=$arrColeta["nfiq".$posicao]?></span><a href="img.php?<?=$cVLogin->imgFile($dedo_file, "full")?>" rel="prettyPhoto[gallery<?=$cont?>]" id="iimg_<?=$cont?>" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Clique para expandir')?>"><?=$cVLogin->icoFile($dedo_file, "")?></a><br><?=legDedo($posicao)?></td>
+												<?php }//for($posicao=6; $posicao <= 10; $posicao++){?>                                                
+                                                            </tr>                                                            
+                                                        </tbody>
+                                                    </table>                                        
+                                        
+                                        </div><!-- End .accordion-inner -->
+									</div>
+								</div>
+                            <?php if($boxUI_status != "off"){?><a href="#" onclick="$('#a_<?=$boxUI_id?>').click();return false;" class="btn btn-mini" style="margin-top:0;"><i class="icon-retweet"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Expandir/ocultar')?> <?=$boxUI_rodape?></a><?php }?>
+							</div><!-- End .accordion-widget ----------------------------------------------- -->                                          
+                            
+<?php }//if($coleta_id_a >= "1"){?>                            
+
+            <div class="form-actions">
+	<?php if($cancelamento_suspensao_id_a <= "0"){?>
+            	<a href="#" class="btn btn-warning btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('1','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Suspensão do Processo')?></a>
+                <a href="#" class="btn btn-red btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('2','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Cancelamento do Processo')?></a>
+       			<button type="button" class="btn btn-large btn-primary" onclick="imprimirCapaProcesso<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Capa do Processo')?></button>
+                <button type="button" class="btn btn-large btn-primary" onclick="imprimirProcessoFull<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Processo Completo')?></button>
+	<?php }//if($cancelamento_suspensao_id_a <= "0"){?>                
+    			<button type="button" class="btn btn-large" onclick="pmodalDisplay('hide');return false;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Fechar')?></button>
+            </div>                              
+                            
+</form>
+<?php	
+}//detalhesProcesso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if($ajax == "detalhesCandidato"){
 	//ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);
 	$id_a = $_GET["id"];

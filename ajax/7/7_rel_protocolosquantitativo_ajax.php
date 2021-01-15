@@ -989,7 +989,7 @@ while($linha = fSQL::FETCH_ASSOC($resu)){
                                                     	<td><?=$linha["code"]?></td>
                                                     	<td><?=$tipo?></td>
                                                     	<td><?=$status?></td>
-                                                    	<td><a href="#" onclick="detalhesProcesso<?=$INC_FAISHER["div"]?>('<?=$linha["id"]?>','<?=$linha["code"]?>','');return false;" class="btn btn-default btn-block" rel="tooltip" title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Visualizar')?>"><i class="icon-search"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Detalhes')?></a></td>
+                                                    	<td><a href="#" onclick="pmodalHtml('<i class=icon-search></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'DETALHES DO PROCESSO')?> #<?=$linha["code"]?>','<?=$AJAX_PAG?>','get','faisher=<?=$faisher?>&ajax=detalhesProcesso&id=<?=$linha["id"]?>');return false;" class="btn btn-default btn-block" rel="tooltip" title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Visualizar')?>"><i class="icon-search"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Detalhes')?></a></td>
                                                     </tr>
 <?php	
 }//while($linha = fSQL::FETCH_ASSOC($resu)){

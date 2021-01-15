@@ -541,6 +541,8 @@ if($ajax == "imprimirRecibo"){
 <form id="FormReciboii" name="FormReciboii" method="post" class="hide" action="export.php" target="_blank">
   <input name="acao" id="acao" type="hidden" value="pdfhtml" />
   <input name="cabecalho" id="cabecalho" type="hidden" value="1" />  
+  <input name="orientacao" id="orientacao" type="hidden" value="landscape" />
+  <input name="papel" id="papel" type="hidden" value="A5" />  
   <input name="nome" id="nome" type="hidden" value="recibo-<?=$code?>" />
   <input name="titulo" id="titulo" type="hidden" value="RECIBO PROCESSO <?=$code?>" />
   <input name="html" id="html" type="hidden" value="<?=$html_recibo?>" />

@@ -249,6 +249,8 @@ if($acao == "pdfhtml"){
 	$html = stripslashes($_POST["html"]);
 	if(isset($_POST["cabecalho"])){ $cabecalho = $_POST["cabecalho"]; }else{ $cabecalho = ""; }
 	if(isset($_POST["pg"])){ $numero_pg = $_POST["pg"]; }else{ $numero_pg = "1"; }
+	if(isset($_POST["papel"])){ $papel = $_POST["papel"]; }else{ $papel = ""; }
+	if(isset($_POST["orientacao"])){ $orientacao = $_POST["orientacao"]; }else{ $orientacao = ""; }
 	
 	//adiciona imagem recebida
 	if((isset($_POST["img"])) and ($_POST["img"] != "")){
@@ -279,6 +281,8 @@ if($acao == "pdfhtml"){
 	$classe_pdf->cabecalhoW("1","1%"); $classe_pdf->cabecalhoW("2","99%");//largura de coluna 1 e 2 do cabeçalho
 	if(isset($_POST["legPg"])){ $classe_pdf->legPagina($_POST["legPg"]); }//legenda complementar em númeração de página
 	if($numero_pg == "1"){ $classe_pdf->nPagina(); }//ativa exeibição número de páginas
+	if($orientacao != ""){ $classe_pdf->orientacao($orientacao); }
+	if($papel != ""){ $classe_pdf->papel($papel); }
 	$classe_pdf->conteudo($html_load);
 	if(isset($_GET["SAVE"])){
 		//gera o pdf - COM DOWNLOAD

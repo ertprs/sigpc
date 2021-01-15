@@ -299,6 +299,8 @@ if($ajax == "imprimirRecibo"){
   <input name="cabecalho" id="cabecalho" type="hidden" value="1" />  
   <input name="nome" id="nome" type="hidden" value="<?=SYS_CONFIG_PROCESSO_SIGLA?>-<?=$code?>" />
   <input name="titulo" id="titulo" type="hidden" value="<?=SYS_CONFIG_PROCESSO_SIGLA?> <?=$code?>" />
+  <input name="orientacao" id="orientacao" type="hidden" value="landscape" />
+  <input name="papel" id="papel" type="hidden" value="A5" />
   <input name="html" id="html" type="hidden" value="<?=$html_recibo?>" />
 </form>	
 <script>
