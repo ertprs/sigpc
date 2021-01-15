@@ -4271,21 +4271,21 @@ if(isset($_POST["id_a"])){
 		}//fim if valida campo						
 	}
 	
-	if($outro_doc_numero_a != ""){ $valida = "1"; 
+	if($valida == "0"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
+	}	
+	
+	if($outro_doc_numero_a != ""){ //$valida = "1"; 
 		//valida campo outro_doc_nome_a -- XXX
 		if($outro_doc_nome_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
 			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Campo Outro Documento não pode estar vazio, preencha corretamente!');//msg
 		}//fim if valida campo		
 	}	
 	
-	if($valida == "0"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
-	}
-
 	//verifica se já existe no sistem
 	$sql_complemto = " datan = '".$datan_a."'";	
 	if($id_a >= "1"){ 
-		$sql_complemto = " AND id != '$id_a'"; 
+		$sql_complemto .= " AND id != '$id_a'"; 
 	}//if($id_a >= "1"){ 
 	
 	if ($rg_a != "") {
@@ -4298,7 +4298,7 @@ if(isset($_POST["id_a"])){
 		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
 		$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
 	}			
-	$verifica_erro .= '- '.$sql_complemto;
+
 	$cont_ = "0";
 	$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
 	while($linha1 = fSQL::FETCH_ASSOC($resu1)){
@@ -4312,7 +4312,7 @@ if(isset($_POST["id_a"])){
 	//verifica se já existe no sistem
 	$sql_complemto = " datan = '".$datan_a."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
 	if($id_a >= "1"){ 
-		$sql_complemto = " AND id != '$id_a'"; 
+		$sql_complemto .= " AND id != '$id_a'"; 
 	}//if($id_a >= "1"){ 
 	
 	$cont_ = "0";

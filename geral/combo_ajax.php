@@ -2879,6 +2879,7 @@ if($ajax == "comboProcesso"){
 	if(isset($_GET["page_limit"])){ $page_limit = $_GET["page_limit"]; }else{ $page_limit = "30"; }
 	if(isset($_GET["tipo"])){ $tipo = $_GET["tipo"]; }else{ $tipo = ""; }
 	if(isset($_GET["status"])){ $status_b = $_GET["status"]; }else{ $status_b = "0"; }
+	if ($status_b <= 2) { $status_b = 0; }
 	$sql_busca = "";
 	//verifica se recebeu uma solicitação de busca por nome
 	if((isset($_GET['term']) && strlen($_GET['term']) > 0)){
@@ -2916,7 +2917,8 @@ if($ajax == "comboProcesso"){
 			$servico_id = $linha["servico_id"];	
 			$tipo_servico = $linha["tipo_servico"];
 			$status = $linha["status"];	
-
+			
+			
 			if ($status != $status_b) {
 				//alimenta array de retorno
 				$row_array['id'] = "";
