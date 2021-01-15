@@ -1808,15 +1808,15 @@ $aLNG[
 
 //*************************************************************************************************************************************************************
 $aLNG[
-'Campo Outro Documento não pode estar vazio, preencha corretamente!'
-] = 
-'Campo Outro Documento não pode estar vazio, preencha corretamente!'; 
-
-//*************************************************************************************************************************************************************
-$aLNG[
 'Deve ser informado pelo menos 1 documento, preencha corretamente!'
 ] = 
 'Deve ser informado pelo menos 1 documento, preencha corretamente!'; 
+
+//*************************************************************************************************************************************************************
+$aLNG[
+'Campo Outro Documento não pode estar vazio, preencha corretamente!'
+] = 
+'Campo Outro Documento não pode estar vazio, preencha corretamente!'; 
 
 //*************************************************************************************************************************************************************
 $aLNG[
