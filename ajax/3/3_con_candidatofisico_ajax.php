@@ -195,11 +195,6 @@ if($ajax == "verificarDoc"){
         </div>
     </div>
 
-	<div class="form-group">
-    <?=$array_temp?>
-    <br>
-    <?=$tipo_doc?>    
-    </div>
     
   <div class="form-actions">
         <button type="button" class="btn btn-large btn-primary" onclick="salvarValidarDoc<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Verificar e salvar cadastro')?></button>
@@ -208,9 +203,9 @@ if($ajax == "verificarDoc"){
 <script>
 function salvarValidarDoc<?=$INC_FAISHER["div"]?>(){
 	doc = $("#verificar_doc<?=$INC_FAISHER["div"]?>").val();
-	if (doc == ""){ alert("Necessário informar o documento para verificar!"); }else{
+	if (doc == ""){ alert("<?=$class_fLNG->txt(__FILE__,__LINE__,'Necessário informar o documento para verificar!')?>"); }else{
 		$("#formCadastroPincipal<?=$array_temp?> #verificar_doc").val(doc);
-		//sendFormCadastroPincipal<?=$array_temp?>();return false;
+		sendFormCadastroPincipal<?=$array_temp?>();return false;
 		pmodalDisplay('hide');		
 	}
 }
@@ -4221,6 +4216,9 @@ if(isset($_POST["id_a"])){
 	$comprovante_endereco_a = getpost_sql($_POST["comprovante_endereco"]);		
 	
 	$del_docs_a = getpost_sql($_POST["del_docs"]);
+	
+	$verificar_doc_a = getpost_sql($_POST["verificar_doc"]);
+	$tipo_doc_a = getpost_sql($_POST["tipo_doc"]);
 		
 	
 
@@ -4379,7 +4377,22 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!');//msg
 	}//fim if valida campo
 	//valida campo mae_a -- XXX
-
+	
+	if($verifica_erro != "0"){
+		if($tipo_doc_a == 1){
+			if($verificar_doc_a != $rg_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+			}
+		}else if($tipo_doc_a == 2){
+			if($verificar_doc_a != $passaporte_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+			}
+		}else{
+			if($verificar_doc_a != $id_estrangeiro_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+			}
+		}
+	}
 
 	//monta array de tel_cont_a
 	$cont = "0"; unset($i_ARRAY);
