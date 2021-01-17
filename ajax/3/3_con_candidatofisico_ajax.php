@@ -205,7 +205,7 @@ function salvarValidarDoc<?=$INC_FAISHER["div"]?>(){
 	doc = $("#verificar_doc<?=$INC_FAISHER["div"]?>").val();
 	if (doc == ""){ alert("<?=$class_fLNG->txt(__FILE__,__LINE__,'Necessário informar o documento para verificar!')?>"); }else{
 		$("#formCadastroPincipal<?=$array_temp?> #verificar_doc").val(doc);
-		sendFormCadastroPincipal<?=$array_temp?>();
+		$("#formCadastroPincipal<?=$array_temp?>").submit();
 		pmodalDisplay('hide');		
 	}
 }
