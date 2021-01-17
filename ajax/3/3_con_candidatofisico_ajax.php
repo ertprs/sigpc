@@ -1279,8 +1279,6 @@ if($id_a != "0"){
 	$rg_a = $linha1["rg"];
 	$rg_data_a = data_mysql($linha1["rg_data"]);
 	$rg_orgao_a = $linha1["rg_orgao"];
-	$outro_doc_nome_a = $linha1["outro_doc_nome"];
-	$outro_doc_numero_a = $linha1["outro_doc_numero"];
 	$passaporte_a = $linha1["passaporte"];
 	$passaporte_data_a = data_mysql($linha1["passaporte_data"]);	
 	$passaporte_pais_a = $linha1["passaporte_pais"];	
@@ -1585,28 +1583,7 @@ $(document).ready(function(){
 										</div>
 										</div>
                                         <?php }//if($passaporte_a != ""){ ?>                                        
-                                        <?php if($outro_doc_nome_a != ""){?>
-                                        <div class="control-group row-fluid">                                        
-										<?php $cont_exib++; $d["content"] = $class_fLNG->txt(__FILE__,__LINE__,'Outro documento (nome)')."[,]".$outro_doc_nome_a; $d["type"] = "text"; $PRINT_ARRAY[] = $d; ?>
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (nome)')?></label>
-                                                <div class="controls display">
-                                                  <?=$outro_doc_nome_a?>
-                                                </div>
-                                            </div>
-										</div>
-										<?php $cont_exib++; $d["content"] = $class_fLNG->txt(__FILE__,__LINE__,'Outro documento (numero)')."[,]".$outro_doc_numero_a; $d["type"] = "text"; $PRINT_ARRAY[] = $d; ?>
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (numero)')?></label>
-                                                <div class="controls display">
-                                                  <?=$outro_doc_numero_a?>
-                                                </div>
-                                            </div>
-										</div>
-										</div>
-                                        <?php }//if($outro_doc_nome_a != ""){?>                                           
+                                  
 										<?php if($obs_geral_a != ""){ $cont_exib++; $d["content"] = $class_fLNG->txt(__FILE__,__LINE__,'Observações gerais')."[,]".imprime_enter($obs_geral_a); $d["type"] = "text"; $PRINT_ARRAY[] = $d; ?>
 										<div class="control-group">
 											<label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Observações gerais')?></label>
@@ -2326,8 +2303,6 @@ if($id_a != "0"){
 	$rg_a = $linha1["rg"];
 	$rg_data_a = data_mysql($linha1["rg_data"]);
 	$rg_orgao_a = $linha1["rg_orgao"];
-	$outro_doc_nome_a = $linha1["outro_doc_nome"];
-	$outro_doc_numero_a = $linha1["outro_doc_numero"];
 	$passaporte_a = $linha1["passaporte"];
 	$passaporte_data_a = data_mysql($linha1["passaporte_data"]);	
 	$passaporte_pais_a = $linha1["passaporte_pais"];	
@@ -2421,6 +2396,10 @@ if($id_a != "0"){
 	if($passaporte_pais_a != ""){
 		$passaporte_pais_a_data = '{id: "'.$passaporte_pais_a.'", text: "'.$passaporte_pais_a.'"}';		
 	}//if($bairro_a != ""){		
+	
+	$tipo_doc = 1;
+	if($passaporte_a != ""){ $tipo_doc = 2; }
+	if($id_estrangeiro_a != ""){ $tipo_doc = 3; }	
 
 }//fim do if if($id_a != "0"){
 
@@ -2435,11 +2414,10 @@ if($id_a == "0"){
 	$datan_a = "";
 	$nacionalidade_a = 'Guinée';
 	$nacionalidade_a_data = '{id: "Guinée", text: "Guinée"}';
+	$tipo_doc = "1";
 	$rg_a = "";
 	$rg_data_a = "";
 	$rg_orgao_a = "";
-	$outro_doc_nome_a = "";
-	$outro_doc_numero_a = "";	
 	$passaporte_a = "";
 	$passaporte_data_a = "";	
 	$passaporte_pais_a = "";		
@@ -2514,6 +2492,33 @@ if($id_a == "0"){
 	$.doTimeout('vTimerCursor<?=$INC_FAISHER["div"]?>', 500, function(){ ancoraHtml('#ancAcao<?=$INC_FAISHER["div"]?>'); $('#<?=$formCadastroPincipal?> #nome').focus(); });//TIMER
 	<?php }?>
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
+
+function selectDoc(){
+	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val()
+	if (tipo_doc == 1){
+		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeIn();
+		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeOut();
+		$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeOut();		
+	}else if (tipo_doc == 2){
+		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeOut();
+		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeIn();
+		$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeOut()		
+	}else{
+		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeOut();
+		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeOut();
+		$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeIn()				
+	}
+	
+	$("#<?=$formCadastroPincipal?> #id_estrangeiro").val('');
+	$("#<?=$formCadastroPincipal?> #id_estrangeiro_data").val('');
+	$("#<?=$formCadastroPincipal?> #id_estrangeiro_emissor").val('');
+	$("#<?=$formCadastroPincipal?> #rg_orgao").val('');
+	$("#<?=$formCadastroPincipal?> #rg").val('');
+	$("#<?=$formCadastroPincipal?> #rg_data").val('');
+	$("#<?=$formCadastroPincipal?> #passaporte").val('');
+	$("#<?=$formCadastroPincipal?> #passaporte_data").val('');
+	$("#<?=$formCadastroPincipal?> #passaporte_pais").select2('data', '');
+}
 </script>
 <?php
 
@@ -2686,14 +2691,12 @@ $(document).ready(function(){
 	});
 	<?php if($nacionalidade_a_data != ""){?>$("#<?=$formCadastroPincipal?> #nacionalidade").select2("data", <?=$nacionalidade_a_data?>);<?php }?>
 	$("#<?=$formCadastroPincipal?> #nacionalidade").on("change", function(){
-		if($(this).val() != "Guinea"){
-			$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeIn();
+		if($(this).val() != "Guinée"){
+			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val("3");
 		}else{//
-			$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeOut();
-			$("#<?=$formCadastroPincipal?> #id_estrangeiro").val("");
-			$("#<?=$formCadastroPincipal?> #id_estrangeiro_data").val("");
-			$("#<?=$formCadastroPincipal?> #id_estrangeiro_emissor").val("");
+			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val("1");
 		}//$(this.val() != ""){
+		selectDoc();
 	});
 });
 </script>                                        
@@ -2710,6 +2713,30 @@ $(document).ready(function(){
                                             </div>
 										</div>                                                                             
                                         </div>
+										<div class="control-group row-fluid">
+                                        <div class="span6">
+                                            <div class="control-group">
+                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Tipo de Documento')?></label>
+                                                <div class="controls">
+                                                    <div class="check-demo-col">
+                                                        <div class="check-line">
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="1" data-skin="square" data-color="blue" <?php if($tipo_doc == "1"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade')?></label>
+                                                      </div>
+                                                    </div>
+                                                    <div class="check-demo-col">
+                                                        <div class="check-line">
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="2" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
+                                                      </div>
+                                                    </div>
+                                                    <div class="check-demo-col">
+                                                        <div class="check-line">
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="3" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
+                                                      </div>
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>                                        
                                         <div class="control-group row-fluid" style="display:none;" id="div_estrangeiro<?=$INC_FAISHER["div"]?>">
                                         <div class="span6">
                                             <div class="control-group">
@@ -2732,7 +2759,7 @@ $(document).ready(function(){
                                             </div>
 										</div>                                            
                                         </div>                                             
-										<div class="control-group row-fluid">
+										<div class="control-group row-fluid" id="div_identidade<?=$INC_FAISHER["div"]?>">
                                         <div class="span6">
                                             <div class="control-group">
                                                 <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade / Orgão expeditor')?></label>
@@ -2754,7 +2781,7 @@ $(document).ready(function(){
                                             </div>
 										</div>
 										</div>
-										<div class="control-group row-fluid">
+										<div class="control-group row-fluid" style="display:none;" id="div_passaporte<?=$INC_FAISHER["div"]?>">
                                         <div class="span6">
                                             <div class="control-group">
                                                 <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
@@ -2802,25 +2829,7 @@ $(document).ready(function(){
                                                 </div>
                                             </div>
 										</div>
-										</div>                                        
-										<div class="control-group row-fluid">
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (nome)')?></label>
-                                                <div class="controls">
-                                                  <input type="text" name="outro_doc_nome" id="outro_doc_nome" value="<?=$outro_doc_nome_a?>" class="span11 cssFonteMai">
-                                                </div>
-                                            </div>
-										</div>
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (número)')?></label>
-                                                <div class="controls">
-                                                  <input type="text" name="outro_doc_numero" id="outro_doc_numero" value="<?=$outro_doc_numero_a?>" class="span11 " maxlength="20">
-                                                </div>
-                                            </div>
-										</div>
-										</div>                                        
+										</div>                                                                             
 										<div class="control-group">
 											<label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Observações gerais')?></label>
 											<div class="controls">
@@ -4119,8 +4128,6 @@ if(isset($_POST["id_a"])){
 	$rg_a = getpost_sql($_POST["rg"]);
 	$rg_data_a = getpost_sql($_POST["rg_data"], "DATA");
 	$rg_orgao_a = getpost_sql($_POST["rg_orgao"]);
-	$outro_doc_nome_a = getpost_sql($_POST["outro_doc_nome"]);
-	$outro_doc_numero_a = getpost_sql($_POST["outro_doc_numero"]);	
 	$pis_a = getpost_sql($_POST["pis"]);
 	$cnh_a = getpost_sql($_POST["cnh"]);
 	$cnh_vencimento_a = getpost_sql($_POST["cnh_vencimento"], "DATA");
@@ -4275,12 +4282,6 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
 	}	
 	
-	if($outro_doc_numero_a != ""){ //$valida = "1"; 
-		//valida campo outro_doc_nome_a -- XXX
-		if($outro_doc_nome_a == ""){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Campo Outro Documento não pode estar vazio, preencha corretamente!');//msg
-		}//fim if valida campo		
-	}	
 	
 	//verifica se já existe no sistem
 	$sql_complemto = " datan = '".$datan_a."'";	
@@ -4450,8 +4451,8 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 	//insere o registro na tabela do sistema
 	//VARS insert simples SQL
 	$tabela = "cad_candidato_fisico";
-	$campos = "code,origem_id,nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,outro_doc_nome,outro_doc_numero,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user,time,user_a,sync";
-	$valores = array($code_a,$cVLogin->getVarLogin("SYS_USER_ORIGEM_ID"),$nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$outro_doc_nome_a,$outro_doc_numero_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time(),"0",time());
+	$campos = "code,origem_id,nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user,time,user_a,sync";
+	$valores = array($code_a,$cVLogin->getVarLogin("SYS_USER_ORIGEM_ID"),$nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time(),"0",time());
 	$result = fSQL::SQL_INSERT_SIMPLES($campos, $tabela, $valores);
 	$id_a = fSQL::SQL_INSERT_ID(); $campos .= ",id"; $valores[] = $id_a;
 	$ARRAY_LOG[] = fGERAL::arrayLog($tabela,$campos,$valores);//gerar array log de auditoria
@@ -4813,10 +4814,6 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Passaporte data validade / país').": ".data_mysql($arrCandidato["passaporte_data"])." ".$arrCandidato["passaporte_pais"];
 		}//if($arrCandidato["passaporte"] != ""){
 			
-		if($arrCandidato["outro_doc_nome"] != ""){
-			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (nome)')."</b>: ".$arrCandidato["outro_doc_nome"];
-			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Outro documento (numero)')."</b>: ".$arrCandidato["outro_doc_numero"];
-		}//if($arrCandidato["outro_doc_nome"] != ""){
 		
 		if($arrCandidato["obs_geral"] != ""){
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Observações gerais')."</b>: ".imprime_enter($arrCandidato["obs_geral"]);
@@ -4866,8 +4863,8 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 
 		
 	//atualiza dados da tabela no DB
-	$campos = "nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,outro_doc_nome,outro_doc_numero,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user_a,sync";
-	$valores = array($nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$outro_doc_nome_a,$outro_doc_numero_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time());	
+	$campos = "nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user_a,sync";
+	$valores = array($nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time());	
 	$tabela = "cad_candidato_fisico";
 	$condicao = "id='$id_a'";
 	fSQL::SQL_UPDATE_SIMPLES($campos, $tabela, $valores, $condicao);
