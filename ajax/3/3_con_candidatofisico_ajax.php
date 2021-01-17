@@ -4333,52 +4333,56 @@ if(isset($_POST["id_a"])){
 		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Deve ser informado pelo menos 1 documento, preencha corretamente!');//msg
 	}	
 	
-	
-	//verifica se já existe no sistem
-	$sql_complemto = " datan = '".$datan_a."'";	
-	if($id_a >= "1"){ 
-		$sql_complemto .= " AND id != '$id_a'"; 
-	}//if($id_a >= "1"){ 
-	
-	if ($rg_a != "") {
-		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-		$sql_complemto .= " rg = '".$rg_a."'";
-	} else if ($passaporte_a != "") {
-		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-		$sql_complemto .= " passaporte = '".$passaporte_a."'";
-	} else if ($id_estrangeiro_a != "") {
-		if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
-		$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
-	}			
+	if ($verifica_erro == "0"){
+		//verifica se já existe no sistem
+		$sql_complemto = "";	
+		if($id_a >= "1"){ 
+			if ($sql_complemto != ""){ $sql_complemto .= "  AND "; }
+			$sql_complemto .= " id != '$id_a'"; 
+		}//if($id_a >= "1"){ 
+		
+		if ($rg_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " rg = '".$rg_a."'";
+		} else if ($passaporte_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " passaporte = '".$passaporte_a."'";
+		} else if ($id_estrangeiro_a != "") {
+			if ($sql_complemto != ""){ $sql_complemto .= " AND "; }
+			$sql_complemto .= " id_estrangeiro = '".$id_estrangeiro_a."'";
+		}	
+		$cont_ = "0";
+		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
+		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
+			$nome_aa = $linha1["nome"];
+			$cont_++;
+		}//fim while
+		if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este documento, verifique!');//msg
+		}//fim if valida campo		
+	}
 
-	$cont_ = "0";
-	$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
-	while($linha1 = fSQL::FETCH_ASSOC($resu1)){
-		$nome_aa = $linha1["nome"];
-		$cont_++;
-	}//fim while
-	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este documento, verifique!');//msg
-	}//fim if valida campo
+
 	
-	//verifica se já existe no sistem
-	$sql_complemto = " datan = '".$datan_a."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
-	if($id_a >= "1"){ 
-		$sql_complemto .= " AND id != '$id_a'"; 
-	}//if($id_a >= "1"){ 
+	if ($verifica_erro == "0"){
+		//verifica se já existe no sistem
+		$sql_complemto = " datan = '".$datan_a."' AND nome = '".$nome_a."' AND mae = '".$mae_a."'";	
+		if($id_a >= "1"){ 
+			$sql_complemto .= " AND id != '$id_a'"; 
+		}//if($id_a >= "1"){ 
+			
+		$cont_ = "0";
+		$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
+		while($linha1 = fSQL::FETCH_ASSOC($resu1)){
+			$nome_aa = $linha1["nome"];
+			$cont_++;
+		}//fim while
+		if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+			$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!');//msg
+		}//fim if valida campo
+	}
 	
-	$cont_ = "0";
-	$resu1 = fSQL::SQL_SELECT_SIMPLES("nome", "cad_candidato_fisico", $sql_complemto, "");
-	while($linha1 = fSQL::FETCH_ASSOC($resu1)){
-		$nome_aa = $linha1["nome"];
-		$cont_++;
-	}//fim while
-	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!');//msg
-	}//fim if valida campo
-	//valida campo mae_a -- XXX
-	
-	if($verifica_erro != "0"){
+	if($verifica_erro == "0"){
 		if($tipo_doc_a == 1){
 			if($verificar_doc_a != $rg_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
 				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
