@@ -2692,9 +2692,9 @@ $(document).ready(function(){
 	<?php if($nacionalidade_a_data != ""){?>$("#<?=$formCadastroPincipal?> #nacionalidade").select2("data", <?=$nacionalidade_a_data?>);<?php }?>
 	$("#<?=$formCadastroPincipal?> #nacionalidade").on("change", function(){
 		if($(this).val() != "Guinée"){
-			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").prop("checked", true);
+			$("#<?=$formCadastroPincipal?> #tipo_doc1").attr('checked', 'checked');
 		}else{//
-			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").prop("checked", true);
+			$("#<?=$formCadastroPincipal?> #tipo_doc3").attr('checked', 'checked');
 		}//$(this.val() != ""){
 		selectDoc();
 	});
