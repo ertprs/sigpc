@@ -2725,12 +2725,12 @@ $(document).ready(function(){
                                                     </div>
                                                     <div class="check-demo-col">
                                                         <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="2" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc2" value="2" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc2"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
                                                       </div>
                                                     </div>
                                                     <div class="check-demo-col">
                                                         <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="3" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc3" value="3" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc3"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
                                                       </div>
                                                     </div>                                                    
                                                 </div>
