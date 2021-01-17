@@ -2692,9 +2692,9 @@ $(document).ready(function(){
 	<?php if($nacionalidade_a_data != ""){?>$("#<?=$formCadastroPincipal?> #nacionalidade").select2("data", <?=$nacionalidade_a_data?>);<?php }?>
 	$("#<?=$formCadastroPincipal?> #nacionalidade").on("change", function(){
 		if($(this).val() != "Guinée"){
-			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val("3");
+			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").prop("checked", true);
 		}else{//
-			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val("1");
+			$("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").prop("checked", true);
 		}//$(this.val() != ""){
 		selectDoc();
 	});
@@ -2720,17 +2720,17 @@ $(document).ready(function(){
                                                 <div class="controls">
                                                     <div class="check-demo-col">
                                                         <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="1" data-skin="square" data-color="blue" <?php if($tipo_doc == "1"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade')?></label>
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="1" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "1"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade')?></label>
                                                       </div>
                                                     </div>
                                                     <div class="check-demo-col">
                                                         <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="2" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="2" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
                                                       </div>
                                                     </div>
                                                     <div class="check-demo-col">
                                                         <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="3" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
+                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="3" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
                                                       </div>
                                                     </div>                                                    
                                                 </div>
