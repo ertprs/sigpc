@@ -205,7 +205,7 @@ function salvarValidarDoc<?=$INC_FAISHER["div"]?>(){
 	doc = $("#verificar_doc<?=$INC_FAISHER["div"]?>").val();
 	if (doc == ""){ alert("<?=$class_fLNG->txt(__FILE__,__LINE__,'Necessário informar o documento para verificar!')?>"); }else{
 		$("#formCadastroPincipal<?=$array_temp?> #verificar_doc").val(doc);
-		sendFormCadastroPincipal<?=$array_temp?>();return false;
+		sendFormCadastroPincipal<?=$array_temp?>();
 		pmodalDisplay('hide');		
 	}
 }
@@ -2577,7 +2577,7 @@ include "inc/inc_js-exclusivo.php";
              <input name="array_temp" id="array_temp" type="hidden" value="<?=$array_temp?>" />  
              <input name="code" id="code" type="hidden" value="<?=$code_a?>" />  
              <div style="padding-top:1px;" id="formPrincipalMSG<?=$INC_FAISHER["div"].$array_temp?>"></div>
-             <input name="verificar_doc" id="verificar_doc" type="" value="" />  
+             <input name="verificar_doc" id="verificar_doc" type="hidden" value="" />  
 <?php
 //MOSTRAR TODAS AS MENSAGENS CRIADAS -------------------------- CLASSE MENSAGENS ----------------------- ||||||||||||||
 $cMSG->imprimirMSG();//imprimir mensagens criadas
