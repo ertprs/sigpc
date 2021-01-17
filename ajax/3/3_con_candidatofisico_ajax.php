@@ -2494,6 +2494,7 @@ if($id_a == "0"){
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
 
 function selectDoc(){
+	console.log('selectDoc');
 	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val()
 	if (tipo_doc == 1){
 		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeIn();
@@ -2692,9 +2693,11 @@ $(document).ready(function(){
 	<?php if($nacionalidade_a_data != ""){?>$("#<?=$formCadastroPincipal?> #nacionalidade").select2("data", <?=$nacionalidade_a_data?>);<?php }?>
 	$("#<?=$formCadastroPincipal?> #nacionalidade").on("change", function(){
 		if($(this).val() != "Guinée"){
-			$("#<?=$formCadastroPincipal?> #tipo_doc1").attr('checked', 'checked');
+			$("#<?=$formCadastroPincipal?> #tipo_doc3").prop("checked", true);
+			console.log('diferente');
 		}else{//
-			$("#<?=$formCadastroPincipal?> #tipo_doc3").attr('checked', 'checked');
+			$("#<?=$formCadastroPincipal?> #tipo_doc1").prop("checked", true);
+			console.log('id');			
 		}//$(this.val() != ""){
 		selectDoc();
 	});
