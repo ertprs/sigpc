@@ -173,7 +173,50 @@ function bAvancada<?=$INC_FAISHER["div"]?>Remove(v_remove){
 
 
 
+if($ajax == "verificarDoc"){
+	$array_temp = $_GET["array_temp"];
+	$tipo_doc = $_GET["tipo_doc"];
+	
+	$doc_leg = $class_fLNG->txt(__FILE__,__LINE__,'Identidade');
+	if($tipo_doc == "2"){ $doc_leg = $class_fLNG->txt(__FILE__,__LINE__,'Passaporte'); }
+	if($tipo_doc == "3"){ $doc_leg = $class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro'); }
+?>
+<form class='form-horizontal form-column form-bordered form-validate'>
+    <div class="control-group">
+        <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Documento informado')?></label>
+        <div class="controls display">
+        	<?=$doc_leg?>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Nº')?></label>
+        <div class="controls">
+        	<input type="text" name="verificar_doc<?=$INC_FAISHER["div"]?>" id="verificar_doc<?=$INC_FAISHER["div"]?>" value="" class="span11 cssFonteMai">
+        </div>
+    </div>
 
+	<div class="form-group">
+    <?=$array_temp?>
+    <br>
+    <?=$tipo_doc?>    
+    </div>
+    
+  <div class="form-actions">
+        <button type="button" class="btn btn-large btn-primary" onclick="salvarValidarDoc<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Verificar e salvar cadastro')?></button>
+   </div>    
+</form>    
+<script>
+function salvarValidarDoc<?=$INC_FAISHER["div"]?>(){
+	doc = $("#verificar_doc<?=$INC_FAISHER["div"]?>").val();
+	if (doc == ""){ alert("Necessário informar o documento para verificar!"); }else{
+		$("#formCadastroPincipal<?=$array_temp?> #verificar_doc").val(doc);
+		//sendFormCadastroPincipal<?=$array_temp?>();return false;
+		pmodalDisplay('hide');		
+	}
+}
+</script>
+<?php
+}//if($ajax == "verificarDoc"){
 
 
 
@@ -2494,7 +2537,6 @@ if($id_a == "0"){
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
 
 function selectDoc(){
-	console.log('selectDoc');
 	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val()
 	if (tipo_doc == 1){
 		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeIn();
@@ -2540,7 +2582,7 @@ include "inc/inc_js-exclusivo.php";
              <input name="array_temp" id="array_temp" type="hidden" value="<?=$array_temp?>" />  
              <input name="code" id="code" type="hidden" value="<?=$code_a?>" />  
              <div style="padding-top:1px;" id="formPrincipalMSG<?=$INC_FAISHER["div"].$array_temp?>"></div>
-             <input name="liberar_obrigatorio" id="liberar_obrigatorio" type="hidden" value="<?=$liberar_obrigatorio?>" />  
+             <input name="verificar_doc" id="verificar_doc" type="" value="" />  
 <?php
 //MOSTRAR TODAS AS MENSAGENS CRIADAS -------------------------- CLASSE MENSAGENS ----------------------- ||||||||||||||
 $cMSG->imprimirMSG();//imprimir mensagens criadas
@@ -2692,6 +2734,7 @@ $(document).ready(function(){
 	});
 	<?php if($nacionalidade_a_data != ""){?>$("#<?=$formCadastroPincipal?> #nacionalidade").select2("data", <?=$nacionalidade_a_data?>);<?php }?>
 	$("#<?=$formCadastroPincipal?> #nacionalidade").on("change", function(){
+		/*
 		if($(this).val() != "Guinée"){
 			$("#<?=$formCadastroPincipal?> #tipo_doc3").prop("checked", true);
 			console.log('diferente');
@@ -2700,6 +2743,7 @@ $(document).ready(function(){
 			console.log('id');			
 		}//$(this.val() != ""){
 		selectDoc();
+		*/
 	});
 });
 </script>                                        
@@ -2716,30 +2760,26 @@ $(document).ready(function(){
                                             </div>
 										</div>                                                                             
                                         </div>
-										<div class="control-group row-fluid">
-                                        <div class="span6">
-                                            <div class="control-group">
-                                                <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Tipo de Documento')?></label>
-                                                <div class="controls">
-                                                    <div class="check-demo-col">
-                                                        <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="1" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "1"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade')?></label>
-                                                      </div>
-                                                    </div>
-                                                    <div class="check-demo-col">
-                                                        <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc2" value="2" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc2"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
-                                                      </div>
-                                                    </div>
-                                                    <div class="check-demo-col">
-                                                        <div class="check-line">
-                                                            <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc3" value="3" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc3"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
-                                                      </div>
-                                                    </div>                                                    
+                                        <div class="control-group">
+                                            <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Tipo de Documento')?></label>
+                                            <div class="controls">
+                                                <div class="check-demo-col">
+                                                    <div class="check-line">
+                                                        <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc1" value="1" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "1"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc1"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade')?></label>
+                                                  </div>
                                                 </div>
+                                                <div class="check-demo-col">
+                                                    <div class="check-line">
+                                                        <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc2" value="2" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "2"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc2"><?=$class_fLNG->txt(__FILE__,__LINE__,'Passaporte')?></label>
+                                                  </div>
+                                                </div>
+                                                <div class="check-demo-col">
+                                                    <div class="check-line">
+                                                        <input name="tipo_doc" type="radio" class='<?=$INC_FAISHER["div"]?>-icheck' id="tipo_doc3" value="3" onChange="selectDoc();" data-skin="square" data-color="blue" <?php if($tipo_doc == "3"){ echo 'checked="checked"'; }?>> <label class='inline' for="tipo_doc3"><?=$class_fLNG->txt(__FILE__,__LINE__,'ID estrangeiro')?></label>
+                                                  </div>
+                                                </div>                                                    
                                             </div>
                                         </div>
-                                        </div>                                        
                                         <div class="control-group row-fluid" style="display:none;" id="div_estrangeiro<?=$INC_FAISHER["div"]?>">
                                         <div class="span6">
                                             <div class="control-group">
@@ -3921,11 +3961,21 @@ function confUp<?=$INC_FAISHER["div"]?>(v_retorno){
 
 
   <div class="form-actions">
-											<button type="submit" class="btn btn-large btn-primary"><?php if($id_a >= "1"){ echo $class_fLNG->txt(__FILE__,__LINE__,'Salvar alterações'); }else{?><?=$class_fLNG->txt(__FILE__,__LINE__,'Adicionar Novo')?><?php }?> <img src="img/ajax-qloader-preto-p.gif" width="18" height="18" style="display:none;" id="btSalvar<?=$array_temp?>" /></button>
+  	<?php if($id_a >= "1"){?>
+											<button type="submit" class="btn btn-large btn-primary"><?=$class_fLNG->txt(__FILE__,__LINE__,'Salvar alterações');?> <img src="img/ajax-qloader-preto-p.gif" width="18" height="18" style="display:none;" id="btSalvar<?=$array_temp?>" /></button>
+  	<?php }else{//if($id_a >= "1"){?>                                            
+                                            <button type="button" class="btn btn-large btn-primary" onclick="validarDoc<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Salvar')?> <img src="img/ajax-qloader-preto-p.gif" width="18" height="18" style="display:none;" id="btSalvar<?=$array_temp?>" /></button>
+  	<?php }//else{//if($id_a >= "1"){?>                                                                                        
 											<button type="button" class="btn btn-large esconder-sendload<?=$INC_FAISHER["div"]?>" onclick="<?php if(isset($_GET["POP"])){ echo "pmodalDisplay('hide');"; }else{?>displayAcao<?=$INC_FAISHER["div"]?>('fecha');<?php }?>"><?=$class_fLNG->txt(__FILE__,__LINE__,'Cancelar')?></button>
 										</div>
 									</form>
-                                    
+<script>
+function validarDoc<?=$INC_FAISHER["div"]?>(){
+	$("#<?=$formCadastroPincipal?> #verificar_doc").val('');
+	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val();
+	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'VERIFICAR DOCUMENTO')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=verificarDoc&array_temp=<?=$array_temp?>&tipo_doc=' + tipo_doc);
+}
+</script>                                    
 </div>
 <div id="divContent_oculto<?=$array_temp?>" style="display:none;"></div>                                   
 <?php
@@ -4310,7 +4360,7 @@ if(isset($_POST["id_a"])){
 		$cont_++;
 	}//fim while
 	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este documento, verifique!');//msg
 	}//fim if valida campo
 	
 	//verifica se já existe no sistem
@@ -4326,7 +4376,7 @@ if(isset($_POST["id_a"])){
 		$cont_++;
 	}//fim while
 	if($cont_ >= "1"){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato $nome_aa cadastrado, verifique!');//msg
+		$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!');//msg
 	}//fim if valida campo
 	//valida campo mae_a -- XXX
 
