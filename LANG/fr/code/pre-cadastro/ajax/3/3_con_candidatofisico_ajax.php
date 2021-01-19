@@ -1372,6 +1372,25 @@ $aLNG[
 ] = 
 'Type de document';
 
+//*************************************************************************************************************************************************************
+$aLNG[
+'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!'
+] = 
+'Il y a déjà un candidat inscrit avec ce nom, date de naissance et nom de mère, vérifiez!'; 
+
+//*************************************************************************************************************************************************************
+$aLNG[
+'CORRIGIR DADOS'
+] = 
+'CORRECT DONNÉES'; 
+
+//*************************************************************************************************************************************************************
+$aLNG[
+'Confira os dados abaixo e se houver algum dado incorreto poderá ser corrigido clicando no botão abaixo.'
+] = 
+"Vérifiez les données ci-dessous et s'il y a des données incorrectes peuvent être corrigées en cliquant sur le bouton ci-dessous."; 
+
+
 
 
 $sLNG["time"]="1609924241"; $sLNG["cont"]="184"; 
