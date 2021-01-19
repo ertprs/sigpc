@@ -2124,3 +2124,9 @@ $aLNG[
 ] = 
 'Não foi encontrado nenhum resultado correspondente à sua pesquisa.'; 
 
+//*************************************************************************************************************************************************************
+$aLNG[
+'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!'
+] = 
+'Já existe um candidato cadastrado com este nome, data de nascimento e nome da mãe, verifique!'; 
+
