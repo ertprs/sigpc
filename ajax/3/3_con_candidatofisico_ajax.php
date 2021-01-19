@@ -2531,12 +2531,11 @@ if($id_a == "0"){
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
 
 $(document).ready(function(e) {
-   $.doTimeout('vTimerSelectDoc<?=$INC_FAISHER["div"]?>', 500, function(){ selectDoc(); });
+   $.doTimeout('vTimerSelectDoc<?=$INC_FAISHER["div"]?>', 500, function(){ selectDoc(true); });
 });
 
-function selectDoc(){
+function selectDoc(init = false){
 	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val()
-	console.log(tipo_doc);
 	if (tipo_doc == 1){
 		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeIn();
 		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeOut();
@@ -2550,15 +2549,16 @@ function selectDoc(){
 		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeOut();
 		$("#<?=$formCadastroPincipal?> #div_estrangeiro<?=$INC_FAISHER["div"]?>").fadeIn()				
 	}
-	
-	$("#<?=$formCadastroPincipal?> #id_estrangeiro").val('');
-	$("#<?=$formCadastroPincipal?> #id_estrangeiro_data").val('');
-	$("#<?=$formCadastroPincipal?> #id_estrangeiro_emissor").val('');
-	$("#<?=$formCadastroPincipal?> #rg").val('');
-	$("#<?=$formCadastroPincipal?> #rg_data").val('');
-	$("#<?=$formCadastroPincipal?> #passaporte").val('');
-	$("#<?=$formCadastroPincipal?> #passaporte_data").val('');
-	$("#<?=$formCadastroPincipal?> #passaporte_pais").select2('data', '');
+	if(!init){
+		$("#<?=$formCadastroPincipal?> #id_estrangeiro").val('');
+		$("#<?=$formCadastroPincipal?> #id_estrangeiro_data").val('');
+		$("#<?=$formCadastroPincipal?> #id_estrangeiro_emissor").val('');
+		$("#<?=$formCadastroPincipal?> #rg").val('');
+		$("#<?=$formCadastroPincipal?> #rg_data").val('');
+		$("#<?=$formCadastroPincipal?> #passaporte").val('');
+		$("#<?=$formCadastroPincipal?> #passaporte_data").val('');
+		$("#<?=$formCadastroPincipal?> #passaporte_pais").select2('data', '');
+	}
 }
 </script>
 <?php
