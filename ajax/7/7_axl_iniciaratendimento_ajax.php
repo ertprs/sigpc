@@ -58,8 +58,8 @@ if($doc_numero != ""){
 <?php	
 	$cont = "0";
 	$condicao = "rg = '".$doc_numero."'";
-	if($doc_tipo == "PASSAPORTE"){ $condicao = "passaporte = '".$doc_numero."'"; }
-	if($doc_tipo == "ID ESTRANGEIRO"){ $condicao = "id_estrangeiro = '".$doc_numero."'"; }
+	if($doc_tipo == $class_fLNG->txt(__FILE__,__LINE__,'PASSAPORTE')){ $condicao = "passaporte = '".$doc_numero."'"; }
+	if($doc_tipo == $class_fLNG->txt(__FILE__,__LINE__,'ID ESTRANGEIRO')){ $condicao = "id_estrangeiro = '".$doc_numero."'"; }
 	$condicao .= " AND datan = '".data_mysql($datan)."'";
 	$resu = fSQL::SQL_SELECT_SIMPLES("id,code,nome,sobrenome","cad_candidato_fisico",$condicao);
 	while($linha = fSQL::FETCH_ASSOC($resu)){ $cont++;
