@@ -2524,14 +2524,19 @@ if($id_a == "0"){
 		<?php }?>
 	});
 
-	selectDoc();
+	
 	<?php if($id_a == "0"){ ?>
 	$.doTimeout('vTimerCursor<?=$INC_FAISHER["div"]?>', 500, function(){ ancoraHtml('#ancAcao<?=$INC_FAISHER["div"]?>'); $('#<?=$formCadastroPincipal?> #nome').focus(); });//TIMER
 	<?php }?>
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
 
+$(document).ready(function(e) {
+   $.doTimeout('vTimerSelectDoc<?=$INC_FAISHER["div"]?>', 500, selectDoc()});
+});
+
 function selectDoc(){
 	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val()
+	console.log(tipo_doc);
 	if (tipo_doc == 1){
 		$("#<?=$formCadastroPincipal?> #div_identidade<?=$INC_FAISHER["div"]?>").fadeIn();
 		$("#<?=$formCadastroPincipal?> #div_passaporte<?=$INC_FAISHER["div"]?>").fadeOut();
@@ -2795,7 +2800,7 @@ $(document).ready(function(){
                                             </div>
 										</div>                                            
                                         </div>                                             
-										<div class="control-group row-fluid" id="div_identidade<?=$INC_FAISHER["div"]?>">
+										<div class="control-group row-fluid" style="display:none;" id="div_identidade<?=$INC_FAISHER["div"]?>">
                                         <div class="span6">
                                             <div class="control-group">
                                                 <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade / Orgão expeditor')?></label>
