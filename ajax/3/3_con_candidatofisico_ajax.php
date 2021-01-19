@@ -1316,7 +1316,6 @@ if($id_a != "0"){
 	$datan_a = data_mysql($linha1["datan"]);
 	$rg_a = $linha1["rg"];
 	$rg_data_a = data_mysql($linha1["rg_data"]);
-	$rg_orgao_a = $linha1["rg_orgao"];
 	$passaporte_a = $linha1["passaporte"];
 	$passaporte_data_a = data_mysql($linha1["passaporte_data"]);	
 	$passaporte_pais_a = $linha1["passaporte_pais"];	
@@ -2340,7 +2339,6 @@ if($id_a != "0"){
 	$datan_a = data_mysql($linha1["datan"]);
 	$rg_a = $linha1["rg"];
 	$rg_data_a = data_mysql($linha1["rg_data"]);
-	$rg_orgao_a = $linha1["rg_orgao"];
 	$passaporte_a = $linha1["passaporte"];
 	$passaporte_data_a = data_mysql($linha1["passaporte_data"]);	
 	$passaporte_pais_a = $linha1["passaporte_pais"];	
@@ -2455,7 +2453,6 @@ if($id_a == "0"){
 	$tipo_doc = "1";
 	$rg_a = "";
 	$rg_data_a = "";
-	$rg_orgao_a = "";
 	$passaporte_a = "";
 	$passaporte_data_a = "";	
 	$passaporte_pais_a = "";		
@@ -2526,6 +2523,8 @@ if($id_a == "0"){
 		$('#bt_edit<?=$INC_FAISHER["div"]?>').hide();
 		<?php }?>
 	});
+
+	selectDoc();
 	<?php if($id_a == "0"){ ?>
 	$.doTimeout('vTimerCursor<?=$INC_FAISHER["div"]?>', 500, function(){ ancoraHtml('#ancAcao<?=$INC_FAISHER["div"]?>'); $('#<?=$formCadastroPincipal?> #nome').focus(); });//TIMER
 	<?php }?>
@@ -2550,7 +2549,6 @@ function selectDoc(){
 	$("#<?=$formCadastroPincipal?> #id_estrangeiro").val('');
 	$("#<?=$formCadastroPincipal?> #id_estrangeiro_data").val('');
 	$("#<?=$formCadastroPincipal?> #id_estrangeiro_emissor").val('');
-	$("#<?=$formCadastroPincipal?> #rg_orgao").val('');
 	$("#<?=$formCadastroPincipal?> #rg").val('');
 	$("#<?=$formCadastroPincipal?> #rg_data").val('');
 	$("#<?=$formCadastroPincipal?> #passaporte").val('');
@@ -2803,7 +2801,6 @@ $(document).ready(function(){
                                                 <label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Identidade / Orgão expeditor')?></label>
                                                 <div class="controls">
                                                   <input type="text" name="rg" id="rg" value="<?=$rg_a?>" class="span8 cssFonteMai" maxlength="20">
-                                                  <input type="text" name="rg_orgao" id="rg_orgao" value="<?=$rg_orgao_a?>" class="span3 cssFonteMai">
                                                 </div>
                                             </div>
 										</div>
@@ -4175,7 +4172,6 @@ if(isset($_POST["id_a"])){
 	$datan_a = getpost_sql($_POST["datan"], "DATA");
 	$rg_a = getpost_sql($_POST["rg"]);
 	$rg_data_a = getpost_sql($_POST["rg_data"], "DATA");
-	$rg_orgao_a = getpost_sql($_POST["rg_orgao"]);
 	$pis_a = getpost_sql($_POST["pis"]);
 	$cnh_a = getpost_sql($_POST["cnh"]);
 	$cnh_vencimento_a = getpost_sql($_POST["cnh_vencimento"], "DATA");
@@ -4521,8 +4517,8 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 	//insere o registro na tabela do sistema
 	//VARS insert simples SQL
 	$tabela = "cad_candidato_fisico";
-	$campos = "code,origem_id,nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user,time,user_a,sync";
-	$valores = array($code_a,$cVLogin->getVarLogin("SYS_USER_ORIGEM_ID"),$nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time(),"0",time());
+	$campos = "code,origem_id,nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user,time,user_a,sync";
+	$valores = array($code_a,$cVLogin->getVarLogin("SYS_USER_ORIGEM_ID"),$nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time(),"0",time());
 	$result = fSQL::SQL_INSERT_SIMPLES($campos, $tabela, $valores);
 	$id_a = fSQL::SQL_INSERT_ID(); $campos .= ",id"; $valores[] = $id_a;
 	$ARRAY_LOG[] = fGERAL::arrayLog($tabela,$campos,$valores);//gerar array log de auditoria
@@ -4841,7 +4837,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		fSMS_ECASH::send($msg, $linha["celular"]);
 	}//if($linha["celular"] != ""){
 
-	/*
+	
 	$linha = fSQL::SQL_SELECT_ONE("id,email","cad_candidato_fisico_email","candidato_fisico_id = '".$id_a."' AND principal = '1'");
 	if($linha["id"] >= "1"){
 		$email = $linha["email"];
@@ -4874,9 +4870,6 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		if($arrCandidato["rg"] != ""){
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Identidade')."</b>: ".$arrCandidato["rg"];
 			$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Identidade data emissão').": ".data_mysql($arrCandidato["rg_data"]);
-			if($arrCandidato["rg_orgao"] != ""){
-				$notificacao .= "<br><b>".$class_fLNG->txt(__FILE__,__LINE__,'Orgão emissor')."</b>: ".$arrCandidato["rg_orgao"];
-			}//if($arrCandidato["rg_orgao"] != ""){
 		}//if($arrCandidato["rg"] != ""){
 		
 		if($arrCandidato["passaporte"] != ""){
@@ -4920,7 +4913,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 		$contentResp = file_get_contents(SYS_URLRAIZ.'sys/http_send_email.php?JesusTeAma=1', false, $context);
 				
 	}//if($linha["id"] >= "1"){
-	*/
+	
 
 }else{  //############# ELSE - ALTERA REGISTRO |-
 
@@ -4933,8 +4926,8 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 
 		
 	//atualiza dados da tabela no DB
-	$campos = "nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_orgao,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user_a,sync";
-	$valores = array($nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_orgao_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time());	
+	$campos = "nome,sobrenome,sexo,nacionalidade,localn,datan,rg,rg_data,pis,cnh,cnh_vencimento,passaporte,passaporte_data,passaporte_pais,grupo_sanguineo,id_estrangeiro,id_estrangeiro_emissor,id_estrangeiro_data,mae,pai,obs_geral,referencia,codigo_energia,user_a,sync";
+	$valores = array($nome_a,$sobrenome_a,$sexo_a,$nacionalidade_a,$localn_a,$datan_a,$rg_a,$rg_data_a,$pis_a,$cnh_a,$cnh_vencimento_a,$passaporte_a,$passaporte_data_a,$passaporte_pais_a,$grupo_sanguineo_a,$id_estrangeiro_a,$id_estrangeiro_emissor_a,$id_estrangeiro_data_a,$mae_a,$pai_a,$obs_geral_a,$referencia_a,$codigo_energia_a,$cVLogin->userReg(),time());	
 	$tabela = "cad_candidato_fisico";
 	$condicao = "id='$id_a'";
 	fSQL::SQL_UPDATE_SIMPLES($campos, $tabela, $valores, $condicao);
