@@ -2531,7 +2531,7 @@ if($id_a == "0"){
 <?php }//else{ //if(isset($_GET["POP"])){ ?>
 
 $(document).ready(function(e) {
-   $.doTimeout('vTimerSelectDoc<?=$INC_FAISHER["div"]?>', 500, selectDoc()});
+   $.doTimeout('vTimerSelectDoc<?=$INC_FAISHER["div"]?>', 500, function(){ selectDoc(); });
 });
 
 function selectDoc(){
