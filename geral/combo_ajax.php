@@ -2920,8 +2920,8 @@ if($ajax == "comboProcesso"){
 
 			$valida = 1;
 			if ($status_b == "0" and $status >= 3){ $valida = 0; }
-			if ($status_b == "4" and $status == 4){ $valida = 0; }
-			if ($status_b == "5" and $status == 5){ $valida = 0; }
+			if ($valida == 1 and $status_b == "4" and $status == 4){ $valida = 0; }
+			if ($valida == 1 and $status_b == "5" and $status == 5){ $valida = 0; }
 			
 			if ($valida == 0) {
 				//alimenta array de retorno
