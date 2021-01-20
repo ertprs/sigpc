@@ -1,4 +1,4 @@
-\n\n<?php //criação de array de linguagem $aLNG[""] = ""; NÃO TRADUZIR O QUE ESTIVER: !!PALAVRA!! /*TAG INÍCIO NÃO MODIFICAR*/ 
+<?php //criação de array de linguagem $aLNG[""] = ""; NÃO TRADUZIR O QUE ESTIVER: !!PALAVRA!! /*TAG INÍCIO NÃO MODIFICAR*/ 
 
 
 //*************************************************************************************************************************************************************
