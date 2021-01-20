@@ -2917,9 +2917,13 @@ if($ajax == "comboProcesso"){
 			$servico_id = $linha["servico_id"];	
 			$tipo_servico = $linha["tipo_servico"];
 			$status = $linha["status"];	
+
+			$valida = 1;
+			if ($status_b == "0" and $status >= 3){ $valida = 0; }
+			if ($status_b == "4" and $status == 4){ $valida = 0; }
+			if ($status_b == "5" and $status == 5){ $valida = 0; }
 			
-			
-			if ($status != $status_b) {
+			if ($valida == 0) {
 				//alimenta array de retorno
 				$row_array['id'] = "";
 				$row_array['text'] = $class_fLNG->txt(__FILE__,__LINE__,'Este processo não está com status !!status!!',array("status"=>processoStatusLeg($status_b)));	
