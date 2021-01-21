@@ -221,6 +221,122 @@ $(document).ready(function(){
 
 
 
+if($ajax == "imprimirCapaProcesso"){
+	$code = getpost_sql($_GET["code"]);
+
+	$qrcode_img = time().".jpeg";
+	$html = capaProcesso($code, $qrcode_img); 
+	
+
+?>	
+
+<form id="FormReciboii" name="FormReciboii" method="post" class="hide" action="export.php" target="_blank">
+  <input name="acao" id="acao" type="hidden" value="pdfhtml" />
+  <input name="cabecalho" id="cabecalho" type="hidden" value="1" /> 
+  <input name="pg" id="pg" type="hidden" value="0" />  
+  <input name="img_apagar" id="img_apagar" type="hidden" value="<?=$qrcode_img?>" />  
+  <input name="nome" id="nome" type="hidden" value="capa-processo-<?=$code?>" />
+  <input name="titulo" id="titulo" type="hidden" value="PROCESSUS" />
+  <input name="html" id="html" type="hidden" value="<?=$html?>" />
+</form>	
+<script>
+//prepara o envio do CSV
+function exportarPDF(){
+	$("#FormReciboii #html").val("<?=stripslashes($html)?>");
+	$('#FormReciboii').submit();
+}
+$(document).ready(function(e) {
+    exportarPDF();
+	
+});
+</script>
+<?php
+}//imprimirCapaProcesso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if($ajax == "imprimirProcessoFull"){
+	$code = getpost_sql($_GET["code"]);
+
+?>	
+
+<form id="FormReciboii" name="FormReciboii" method="post" class="hide" action="export.php" target="_blank">
+  <input name="acao" id="acao" type="hidden" value="processoFull" />
+  <input name="cabecalho" id="cabecalho" type="hidden" value="1" /> 
+  <input name="titulo" id="titulo" type="hidden" value="PROCESSUS" />
+  <input name="code" id="code" type="hidden" value="<?=$code?>" />
+</form>	
+<script>
+//prepara o envio do CSV
+function exportarPDF(){
+	$('#FormReciboii').submit();
+}
+$(document).ready(function(e) {
+    exportarPDF();
+});
+</script>
+<?php
+}//imprimirProcessoFull
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -761,9 +877,11 @@ if($cont_ARRAY >= "1"){
 <?php }//if($coleta_id_a >= "1"){?>                            
 
             <div class="form-actions">
-	<?php if($cancelamento_suspensao_id_a <= "0"){?>
+	<?php if($cancelamento_suspensao_id_a <= "0" and $servico_id_a == "14"){?>
+    <!--
             	<a href="#" class="btn btn-warning btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('1','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Suspensão do Processo')?></a>
                 <a href="#" class="btn btn-red btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('2','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Cancelamento do Processo')?></a>
+                -->
        			<button type="button" class="btn btn-large btn-primary" onclick="imprimirCapaProcesso<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Capa do Processo')?></button>
                 <button type="button" class="btn btn-large btn-primary" onclick="imprimirProcessoFull<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Processo Completo')?></button>
 	<?php }//if($cancelamento_suspensao_id_a <= "0"){?>                
@@ -3030,6 +3148,16 @@ while($linha1 = fSQL::FETCH_ASSOC($QueryListaPag)){
 <?php }?>
 </div>
 </div><!-- #fim rolagem faisher -->
+
+<script>
+function imprimirCapaProcesso<?=$INC_FAISHER["div"]?>(v_code){
+	faisher_ajax('div_oculta', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=imprimirCapaProcesso&code='+v_code, 'get', 'ADD');
+}//imprimirRecibo
+
+function imprimirProcessoFull<?=$INC_FAISHER["div"]?>(v_code){
+	faisher_ajax('div_oculta', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=imprimirProcessoFull&code='+v_code, 'get', 'ADD');
+}//imprimirRecibo
+</script>
 <?php
 //paginação
 $REG_TOTAL_INC = "1"; //criar a variavel faz exibir os totais por página
