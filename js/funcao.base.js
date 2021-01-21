@@ -259,6 +259,80 @@ function pmodalDisplay(v_acao){
 	}
 }//pmodalDisplay
 
+
+
+function pmodalHtml2(v_titulo,v_conteudo,v_tipo,v_get,v_class){
+	if(v_get == "" || v_get == null){ v_get = ""; }
+	if(v_class == "" || v_class == null){ v_class = ""; }
+	$('#pModalConteudo2').show();
+	//$('#pModalOutraPG').hide();
+	$('#pModalLoadermsg2').html('');
+	$("[rel=tooltip]").tooltip('hide');
+	$("#pModal").draggable({ handle: "#pModalTitulo2" }); 
+	if(v_tipo == "html"){
+    	$('#pModalTitulo2').html(v_titulo);
+		if(v_get == "append"){	$('#pModalConteudo2 div').hide(); $('#pModalConteudo2').append(v_conteudo); }else{ $('#pModalConteudo2').html(v_conteudo); }
+    	$('#pModalRodape2').html('<button class="btn" data-dismiss="modal">Sair</button>');
+    }
+	if((v_tipo == "get") || (v_tipo == "post")){
+		//$('#pModalOutraPG').show();
+    	$('#pModalTitulo2').html(v_titulo);
+    	$('#pModalConteudo2').html('<div class="content '+v_class+'" style="padding:3px;" id="pModalConteudoOn2"></div>');
+		faisher_ajax('pModalConteudoOn2', 'pModalLoader2', v_conteudo, v_get, v_tipo);
+    	$('#pModalRodape2').html('');
+		$('#pModalPage2').val(v_conteudo);
+		$('#pModalGet2').val(v_get);
+		$('#pModalClass2').val(v_class);
+    }
+	pmodalDisplay2('show');
+}//pmodalHtml
+function pmodalDisplay2(v_acao){
+	if(v_acao == 'show'){
+		//ativa verificação de hide rolagem
+		var p_scroll = $(window).scrollTop();
+		$(window).bind('scroll', function(){
+			if($('#pModal2').is(':visible') == true){ $(window).scrollTop(p_scroll); }else{ $(window).unbind('scroll'); }
+		});		
+		/*$("body").css("overflow", "hidden");
+		$.doTimeout('vTimerpModal', 500, function(){
+			if($('#pModal').is(':visible') == true){ return true; }else{ $.doTimeout('vTimerpModal'); $("body").css("overflow", "auto"); }
+		});//TIMER */
+		/*
+		var v_w = Number($(window).width()); 
+		if($(window).width() >= "1500"){
+			$('#pModal').css('width','1500'); $('#pModal').css('margin-left','-760px');
+		}else if($(window).width() >= "1400"){
+			$('#pModal').css('width','1400'); $('#pModal').css('margin-left','-700px');
+		}else if($(window).width() >= "1300"){
+			$('#pModal').css('width','1300'); $('#pModal').css('margin-left','-660px');
+		}else if($(window).width() >= "1100"){
+			$('#pModal').css('width','1100px'); $('#pModal').css('margin-left','-570px');
+		}else if($(window).width() >= "1100"){
+			$('#pModal').css('width','1100px'); $('#pModal').css('margin-left','-570px');
+		}else if($(window).width() >= "900"){
+			$('#pModal').css('width','980px'); $('#pModal').css('margin-left','-470px');
+			//verifica se tem numero de processo/oficio
+		}else if($(window).width() >= "765"){
+			$('#pModal').css('width','840px'); $('#pModal').css('margin-left','-370px');
+		}else{ i_height = 450; v_m = v_w-15;
+			$('#pModal').css('width',v_m+'px'); $('#pModal').css('margin','0px');
+		}		
+		*/
+		/*var v_w = Number($(window).width());
+		if($(window).width() >= "950"){ $('#pModal').css('width','950px'); $('#pModal').css('margin-left','-400px');
+		}else{ //v_m = v_w-15;
+			$('#pModal').css('width',v_m+'px'); $('#pModal').css('margin-left','-5px');
+		}
+		*/
+		$('#pModal2').modal('show');
+	}else{
+		$('#pModalLock2').hide();
+		$('#pModal2').modal('hide');
+		$('#pModalOutraPG2').hide();		
+	}
+}//pmodalDisplay2
+
+
 function pfullcontentHtml(v_titulo,v_conteudo,v_tipo,v_get){
 	if(v_get == "" || v_get == null){ v_get = ""; }
 	$('#pFullContent #pFullContent_content').html('');
