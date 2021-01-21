@@ -4391,7 +4391,7 @@ if(isset($_POST["id_a"])){
 		}//fim if valida campo
 	}
 	
-	if ($id_a >= "1"){
+	if ($id_a <= "0"){
 		if($verifica_erro == "0"){
 			if($tipo_doc_a == 1){
 				if($verificar_doc_a != $rg_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
