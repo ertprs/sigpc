@@ -3040,8 +3040,9 @@ $(document).ready(function(e) {
 		if(confirm('<?=$class_fLNG->txt(__FILE__,__LINE__,'Gostaria imprimir recibo do processo')?> \'<?=$code_a?>\'?')) {
 			imprimirRecibo<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
 		}
-		
+		<?php if($servico_id_a == "14"){?>
 		imprimirProcessoFull<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
+		<?php }//if($servico_id_a == "13" || $servico_id_a == "14"){?>		
 	});
 });
 </script>
@@ -3526,8 +3527,9 @@ $(document).ready(function(e) {
 		if(confirm('<?=$class_fLNG->txt(__FILE__,__LINE__,'Gostaria imprimir recibo do processo')?> \'<?=$code_a?>\'?')) {
 			imprimirRecibo<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
 		}
-		
+		<?php if($servico_id_a == "14"){?>
 		imprimirProcessoFull<?=$INC_FAISHER["div"]?>("<?=$code_a?>");
+		<?php }//if($servico_id_a == "14"){?>		
 	});
 });
 </script>
