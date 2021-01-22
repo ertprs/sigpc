@@ -334,6 +334,7 @@ echo $cMenu->imprimirMENU();
 			</ul>
 			<div class="user">
 				<ul class="icon-nav">
+                <!--
 					<li class='dropdown colo'>
 						
 						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
@@ -361,6 +362,7 @@ echo $cMenu->imprimirMENU();
 							</li>
 						</ul>
 					</li>
+                    -->
                     <!--<li class='dropdown colo'>
 						<a href="#" onClick="$('#div_mapamenugeral').fadeIn(function(){ ajustaDivFull(); });return false;"><i class="icon-sitemap"></i></a>
 					</li>-->
