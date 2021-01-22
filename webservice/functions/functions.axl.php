@@ -121,8 +121,10 @@ global $class_fLNG;
 			//enviar SMS
 			$linha = fSQL::SQL_SELECT_ONE("C.nome,T.celular","cad_candidato_fisico C,cad_candidato_fisico_celular T","C.id = '".$candidato_fisico_id."' AND C.id = T.candidato_fisico_id AND principal = '1'");
 			if($linha["celular"] != ""){
+				$linha["celular"] = substr($linha["celular"],3,strlen($linha["celular"])-3);
 				$msg = "Vos donnees ont ete capturees avec succes - SIGPC RNC n. ".$code;
-				fSMS_ECASH::send($msg, $linha["celular"]);
+				$msg = str_replace(" ","_",$msg);		
+				fSMS_ECASH::send($msg, $linha["celular"]);				
 			}
 		}//if($valida == ""){
 	}//if($valida == ""){
@@ -296,8 +298,10 @@ global $class_fLNG;
 			//enviar SMS
 			$linha = fSQL::SQL_SELECT_ONE("C.nome,T.celular","cad_candidato_fisico C,cad_candidato_fisico_celular T","C.id = '".$candidato_fisico_id."' AND C.id = T.candidato_fisico_id AND principal = '1'");
 			if($linha["celular"] != ""){
+				$linha["celular"] = substr($linha["celular"],3,strlen($linha["celular"])-3);
 				$msg = "Votre Permis de Conduire est pret, veuillez chercher le SIGPC pour le retrait - RNC n. ".$code;
-				fSMS_ECASH::send($msg, $linha["celular"]);
+				$msg = str_replace(" ","_",$msg);		
+				fSMS_ECASH::send($msg, $linha["celular"]);					
 			}
 							
 			//enviar email
