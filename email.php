@@ -20,10 +20,11 @@ forceHttps();//@@@@@@ FORÇAR O HTTPS +++++
 ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);
 
 if($ajax == "sms"){
-	$celular = "224660203233";
+	$celular = "224660203233";//+224 660 20 32 33
 	$celular = substr($celular,3,strlen($celular)-3);
 	echo $celular;
 	$msg = "Votre dossier a ete ouvert au SIGPC sous le numero 25445698451";
+	$msg = str_replace(" ","_",$msg);
 	$result = fSMS_ECASH::send($msg, $celular);
 	echo "<br>result:".$result;
 }
