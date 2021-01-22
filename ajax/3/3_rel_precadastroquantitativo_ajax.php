@@ -3147,7 +3147,6 @@ while($linha1 = fSQL::FETCH_ASSOC($QueryListaPag)){
 	<div style="height:150px; padding:20px 0 0 10px; clear:both;"><i class="icon-info-sign"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Não foi encontrado nenhum resultado correspondente à sua pesquisa.')?></div>
 <?php }?>
 </div>
-</div><!-- #fim rolagem faisher -->
 
 <script>
 function imprimirCapaProcesso<?=$INC_FAISHER["div"]?>(v_code){
@@ -3158,6 +3157,8 @@ function imprimirProcessoFull<?=$INC_FAISHER["div"]?>(v_code){
 	faisher_ajax('div_oculta', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=imprimirProcessoFull&code='+v_code, 'get', 'ADD');
 }//imprimirRecibo
 </script>
+</div><!-- #fim rolagem faisher -->
+
 <?php
 //paginação
 $REG_TOTAL_INC = "1"; //criar a variavel faz exibir os totais por página
