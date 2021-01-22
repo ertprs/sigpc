@@ -264,7 +264,8 @@ global $class_fLNG;
 	$id_emissao = $ARR["id_emissao"];
 	$numero_espelho = $ARR["numero_espelho"];
 	
-
+	print_r($ARR);
+	exit(0);
 	$valida = "";
 	if($code == ""){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'Nº do processo é obrigatório'); }
 	if($id_origem == ""){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'ID da origem é obrigatório'); }else{//if($id_origem == ""){
@@ -272,7 +273,7 @@ global $class_fLNG;
 		if($linha["id"] <= "0"){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'ID da origem não é válido'); }
 	}//}else{//if($id_origem == ""){
 	if($id_emissao == "0" || $id_emissao == "" || $id_emissao == NULL){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'ID emissão é obrigatório'); }		
-	if($numero_espelho == "0" || $numero_espelho == "" || $id_emissao == NULL){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'Número do espelho é obrigatório'); }		
+	if($numero_espelho == "0" || $numero_espelho == "" || $numero_espelho == NULL){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'Número do espelho é obrigatório'); }		
 	
 	$codigo_retorno = (int)"3";//falha no processamento
 	
