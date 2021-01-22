@@ -4850,7 +4850,7 @@ if($id_a == "0"){ //############# IF - GRAVA NOVO REGISTRO |-----> SQL CADASTRO
 	if($linha["celular"] != ""){
 		$linha["celular"] = substr($linha["celular"],3,strlen($linha["celular"])-3);
 		$msg = "Votre dossier a ete ouvert au SIGPC sous le numero ".$code_a;
-		$msg = str_replace(" ","_",$msg);		
+		$msg = str_replace(" ","%20",$msg);		
 		fSMS_ECASH::send($msg, $linha["celular"]);
 	}//if($linha["celular"] != ""){
 

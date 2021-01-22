@@ -123,7 +123,7 @@ global $class_fLNG;
 			if($linha["celular"] != ""){
 				$linha["celular"] = substr($linha["celular"],3,strlen($linha["celular"])-3);
 				$msg = "Vos donnees ont ete capturees avec succes - SIGPC RNC n. ".$code;
-				$msg = str_replace(" ","_",$msg);		
+				$msg = str_replace(" ","%20",$msg);		
 				fSMS_ECASH::send($msg, $linha["celular"]);				
 			}
 		}//if($valida == ""){
@@ -300,7 +300,7 @@ global $class_fLNG;
 			if($linha["celular"] != ""){
 				$linha["celular"] = substr($linha["celular"],3,strlen($linha["celular"])-3);
 				$msg = "Votre Permis de Conduire est pret, veuillez chercher le SIGPC pour le retrait - RNC n. ".$code;
-				$msg = str_replace(" ","_",$msg);		
+				$msg = str_replace(" ","%20",$msg);		
 				fSMS_ECASH::send($msg, $linha["celular"]);					
 			}
 							
