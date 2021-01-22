@@ -27,8 +27,8 @@ if($ajax == "sms"){
 		$celular = substr($celular,3,strlen($celular)-3);
 	}
 	echo "<br>celular:".$celular;
-	$msg = urlencode("Votre dossier a ete ouvert au SIGPC sous le numero 25445698451");
-	//$msg = str_replace(" ","%20",$msg);
+	$msg = "Votre dossier a ete ouvert au SIGPC sous le numero 25445698451";
+	$msg = str_replace(" ","%20",$msg);
 	echo "<br>msg:".$msg;
 	$result = fSMS_ECASH::send($msg, $celular);
 	echo "<br>result:".$result;
