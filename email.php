@@ -22,8 +22,11 @@ ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E
 if($ajax == "sms"){
 	//$celular = "224660203233";//+224 660 20 32 33
 	$celular = "224620406749";
-	$celular = substr($celular,3,strlen($celular)-3);
-	echo $celular;
+	if(isset($_GET["celular"])){$celular = $_GET["celular"]; }
+	if(strlen($celular) >= 12){ 
+		$celular = substr($celular,3,strlen($celular)-3);
+	}
+	echo "<br>celular:".$celular;
 	$msg = "Votre dossier a ete ouvert au SIGPC sous le numero 25445698451";
 	$msg = str_replace(" ","_",$msg);
 	$result = fSMS_ECASH::send($msg, $celular);
