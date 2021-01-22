@@ -468,6 +468,22 @@ $cMenu->imprimirAbasMENU();
     </div>
     <input id="pModalPage" name="pModalPage" type="hidden" value=""><input id="pModalGet" name="pModalGet" type="hidden" value=""><input id="pModalClass" name="pModalClass" type="hidden" value="">
 </div>
+
+<div id="pModal2" class="modal hide fade" style="overflow:hidden;" tabindex="-1" role="dialog" aria-labelledby="pModalLabel2" aria-hidden="true" data-backdrop="static">
+    <div class="modal-header">
+        <button type="button" class="close esconde-pModal icon-remove-sign" data-dismiss="modal" aria-hidden="true" style="margin:0; font-size:32px;" rel="tooltip" data-placement="left" data-original-title="Fechar"></button>
+        <h3 id="pModalTitulo2" style="cursor:move;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Titulo')?></h3>
+    </div>
+    <div id="pModalLoader2" style="text-align:center; padding:20px; display:none;"><img src="../img/ajax-p-loader.gif"> <span id="pModalLoadermsg2"></span></div>
+    <div class="modal-body" id="pModalConteudo2">
+       <!-- conteudo -->
+    </div>
+    <div class="modal-footer" id="pModalRodape2">
+        <button class="btn" data-dismiss="modal"><?=$class_fLNG->txt(__FILE__,__LINE__,'Sair')?></button>
+    </div>
+    <input id="pModalPage2" name="pModalPage2" type="hidden" value=""><input id="pModalGet2" name="pModalGet2" type="hidden" value=""><input id="pModalClass2" name="pModalClass2" type="hidden" value="">
+</div>
+
 <div class="fulldiv" id="pModalLock" onClick="exibMensagem('pModalLock','info','<?=$class_fLNG->txt(__FILE__,__LINE__,'AGUARDE O CARREGAMENTO COMPLETO DOS DADOS, NÃO FECHA A JANELA!')?>',3000);" style="position:absolute; top:0; left:0; z-index:99999; display:none;"></div>
 <!-- End #pModal --> 
 

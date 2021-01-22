@@ -176,6 +176,8 @@ function bAvancada<?=$INC_FAISHER["div"]?>Remove(v_remove){
 if($ajax == "verificarDoc"){
 	$array_temp = $_GET["array_temp"];
 	$tipo_doc = $_GET["tipo_doc"];
+	$popup = $_GET["popup"];
+	if(isset($_GET["popup"])) { $popup = $_GET["popup"]; }else{ $popup = "0"; }
 	
 	$doc_leg = $class_fLNG->txt(__FILE__,__LINE__,'Identidade');
 	if($tipo_doc == "2"){ $doc_leg = $class_fLNG->txt(__FILE__,__LINE__,'Passaporte'); }
@@ -206,7 +208,10 @@ function salvarValidarDoc<?=$INC_FAISHER["div"]?>(){
 	if (doc == ""){ alert("<?=$class_fLNG->txt(__FILE__,__LINE__,'Necessário informar o documento para verificar!')?>"); }else{
 		$("#formCadastroPincipal<?=$array_temp?> #verificar_doc").val(doc);
 		$("#formCadastroPincipal<?=$array_temp?>").submit();
-		pmodalDisplay('hide');		
+		pmodalDisplay2('hide');	
+		<?php if($popup >= "1"){?>
+		pmodalDisplay('show');			
+		<?php }//if($popup >= "1"){?>		
 	}
 }
 </script>
@@ -3970,7 +3975,10 @@ function confUp<?=$INC_FAISHER["div"]?>(v_retorno){
 function validarDoc<?=$INC_FAISHER["div"]?>(){
 	$("#<?=$formCadastroPincipal?> #verificar_doc").val('');
 	tipo_doc = $("#<?=$formCadastroPincipal?> input[name='tipo_doc']:checked").val();
-	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'VERIFICAR DOCUMENTO')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=verificarDoc&array_temp=<?=$array_temp?>&tipo_doc=' + tipo_doc);
+	pmodalHtml2('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'VERIFICAR DOCUMENTO')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=verificarDoc&array_temp=<?=$array_temp?>&popup=<?=$_GET["POP"]?>&tipo_doc=' + tipo_doc);
+	<?php if($_GET["POP"]){?>
+	pmodalDisplay('hide');
+	<?php }//if($_GET["POP"])){?>	
 }
 </script>                                    
 </div>
@@ -4383,18 +4391,20 @@ if(isset($_POST["id_a"])){
 		}//fim if valida campo
 	}
 	
-	if($verifica_erro == "0"){
-		if($tipo_doc_a == 1){
-			if($verificar_doc_a != $rg_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
-			}
-		}else if($tipo_doc_a == 2){
-			if($verificar_doc_a != $passaporte_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
-			}
-		}else{
-			if($verificar_doc_a != $id_estrangeiro_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
-				$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+	if ($id_a <= "0"){
+		if($verifica_erro == "0"){
+			if($tipo_doc_a == 1){
+				if($verificar_doc_a != $rg_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+					$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+				}
+			}else if($tipo_doc_a == 2){
+				if($verificar_doc_a != $passaporte_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+					$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+				}
+			}else{
+				if($verificar_doc_a != $id_estrangeiro_a){ if($verifica_erro != "0"){ $verifica_erro .= "<br>"; }else{ $verifica_erro = ""; }
+					$verifica_erro .= "- ".$class_fLNG->txt(__FILE__,__LINE__,'Documento não verificado, tente novamente!');//msg
+				}
 			}
 		}
 	}

@@ -826,8 +826,10 @@ if($cont_ARRAY >= "1"){
 	<?php if($cancelamento_suspensao_id_a <= "0"){?>
             	<a href="#" class="btn btn-warning btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('1','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Suspensão do Processo')?></a>
                 <a href="#" class="btn btn-red btn-large" onclick="modalMotivo<?=$INC_FAISHER["div"]?>('2','<?=$id_a?>','<?=$code?>');return false;"><i class="glyphicon-ban"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Solicitar Cancelamento do Processo')?></a>
+                <?php if($servico_id_a == "14"){?>
        			<button type="button" class="btn btn-large btn-primary" onclick="imprimirCapaProcesso<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Capa do Processo')?></button>
                 <button type="button" class="btn btn-large btn-primary" onclick="imprimirProcessoFull<?=$INC_FAISHER["div"]?>('<?=$code?>');return false;"><i class="icon-print"></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'Processo Completo')?></button>
+                <?php }//if($servico_id_a == "14"){?>                
 	<?php }//if($cancelamento_suspensao_id_a <= "0"){?>                
     			<button type="button" class="btn btn-large" onclick="pmodalDisplay('hide');return false;"><?=$class_fLNG->txt(__FILE__,__LINE__,'Fechar')?></button>
             </div>                              
