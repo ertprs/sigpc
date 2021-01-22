@@ -12,11 +12,8 @@ include "config/incPacote.php";//vars do pacote de cliente
 //include "sys/cabecalho_ajax.php";//classes de conexao
 //INCLUDES DE CONTROLE ---<<<
 
-//INICIAR ARQUIVO DE LINGUAGEM --->>>
-$class_fLNG->loadFile(__FILE__);//incluir o arquivo de linguagem
-//INICIAR ARQUIVO DE LINGUAGEM ---<<<
-
-
+$ajax = isset($_GET["ajax"]) ? $_GET["ajax"] :  '';
+echo "<br>ajax:".$ajax;
 
 forceHttps();//@@@@@@ FORÇAR O HTTPS +++++
 
