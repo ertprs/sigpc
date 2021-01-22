@@ -12,7 +12,7 @@ use PHPMailer\PHPMailer\Exception;
 //echo "_SERVER<pre>"; print_r($_SERVER); echo "</pre>"; exit(0);
 
 //BLOQUEIA O ACESSO FORA DO LOCAL NO SERVIDOR LOCAL
-if(($_SERVER["SERVER_ADDR"] != $_SERVER["REMOTE_ADDR"]) or ($_SERVER["SERVER_PORT"] != "443")){ echo "0"; exit(0); }
+//if(($_SERVER["SERVER_ADDR"] != $_SERVER["REMOTE_ADDR"]) or ($_SERVER["SERVER_PORT"] != "443")){ echo "0"; exit(0); }
 
 
 /* COMO IMPLEMENTAR::
