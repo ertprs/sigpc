@@ -1,1 +1,0 @@
-"{\"numero_rnt\":\"17595874199\",\"numero_processo\":\"58494114181\",\"id_origem\":1,\"id_coleta\":13,\"foto\":null,\"assinatura\":null,\"impressoes_digitais\":null}"
