@@ -28,7 +28,7 @@ if($ajax == "sms"){
 	}
 	echo "<br>celular:".$celular;
 	$msg = "Votre dossier a ete ouvert au SIGPC sous le numero 25445698451";
-	$msg = str_replace(" ","_",$msg);
+	$msg = str_replace(" ","%",$msg);
 	$result = fSMS_ECASH::send($msg, $celular);
 	echo "<br>result:".$result;
 }
