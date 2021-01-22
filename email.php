@@ -68,6 +68,7 @@ if($ajax == "enviarEmail"){
 	
 	echo "\nSERVER_ADDR:".$_SERVER["SERVER_ADDR"];
 	echo "\nREMOTE_ADDR:".$_SERVER["REMOTE_ADDR"];	
+	echo "\nSERVER_PORT:".$_SERVER["SERVER_PORT"];	
 	//if(($_SERVER["SERVER_ADDR"] != $_SERVER["REMOTE_ADDR"]) or ($_SERVER["SERVER_PORT"] != "443")){ echo "0"; exit(0); }
 	
 	//informações do retorno: 0 - bloqueado acesso, 1 - sucesso, 2 - erros de configuração, 3 - erro de classe
