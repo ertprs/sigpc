@@ -17,7 +17,7 @@ echo "<br>ajax:".$ajax;
 
 forceHttps();//@@@@@@ FORÇAR O HTTPS +++++
 
-
+ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);
 
 if($ajax == "sms"){
 	$celular = $_GET["celular"];
