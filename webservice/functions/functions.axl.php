@@ -293,7 +293,7 @@ global $class_fLNG;
 			//ATUALIZAR STATUS -> 4: IMPRESSO
 			fSQL::SQL_UPDATE_SIMPLES("status,sync,emissao_id,emissao_time,emissao_espelho","axl_processo",array("4",time(),$id_emissao,time(),$numero_espelho), "id = '".$processo_id."'");
 			
-			fPROCESSO::criarEvento($class_fLNG->txt(__FILE__,__LINE__,'Documento emitido'),$class_fLNG->txt(__FILE__,__LINE__,'Documento emitido'),$class_fLNG->txt(__FILE__,__LINE__,'Automático'),$class_fLNG->txt(__FILE__,__LINE__,'Sistema'),$processo_id_a,"");	
+			fPROCESSO::criarEvento($class_fLNG->txt(__FILE__,__LINE__,'Documento emitido'),$class_fLNG->txt(__FILE__,__LINE__,'Documento emitido'),$class_fLNG->txt(__FILE__,__LINE__,'Automático'),$class_fLNG->txt(__FILE__,__LINE__,'Sistema'),$processo_id,"");	
 			
 			//enviar SMS
 			$linha = fSQL::SQL_SELECT_ONE("C.nome,T.celular","cad_candidato_fisico C,cad_candidato_fisico_celular T","C.id = '".$candidato_fisico_id."' AND C.id = T.candidato_fisico_id AND principal = '1'");
