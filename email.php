@@ -1,0 +1,74 @@
+<?php // Breno Cruvinel - breno.cruvinel09@gmail.com
+//ini_set('display_errors',1);ini_set('display_startup_erros',1);error_reporting(E_ALL);aoskdpoaksdpok
+//INCLUDES DE CONTROLE --->>>
+include "config/globalSession.php";//inicia sessao php
+include "config/globalVars.php";//vars padrao
+include "sys/langAction.php";//inicia arquivo de linguage
+include "sys/globalFunctions.php";//funcoes padrao
+include "sys/globalClass.php";//classes padrao
+include "sys/classConexao.php";//classes de conexao
+include "sys/incUpdate.php";//verificador de updates
+include "config/incPacote.php";//vars do pacote de cliente
+//include "sys/cabecalho_ajax.php";//classes de conexao
+//INCLUDES DE CONTROLE ---<<<
+
+//INICIAR ARQUIVO DE LINGUAGEM --->>>
+$class_fLNG->loadFile(__FILE__);//incluir o arquivo de linguagem
+//INICIAR ARQUIVO DE LINGUAGEM ---<<<
+
+
+
+forceHttps();//@@@@@@ FORÇAR O HTTPS +++++
+
+
+
+if($ajax == "sms"){
+	$celular = $_GET["celular"];
+	$msg = "Votre dossier a ete ouvert au SIGPC sous le numero 25445698451";
+	fSMS_ECASH::send($msg, $linha["celular"]);
+}
+
+
+
+if($ajax == "enviarEmail"){
+	$email = "breno.cruvinel@hotmail.com";
+
+		
+	$html_template = file_get_contents(VAR_DIR_FILES."files/templates/email/email-notificacao.html");
+	//monta mensagem template
+	$html_template = str_replace("!nome_fisico!","teste",$html_template);
+	$html_template = str_replace("!url_raiz!",SYS_URLRAIZ,$html_template);		
+	$html_template = str_replace("!notificacao!",'notificacao',$html_template);
+					
+	//#################### INICIO ENVIA EMAIL ##################>>>>>>>>>>>>>>>>
+	$opts = array(
+		'http'=>array('header'=>"Content-type: application/x-www-form-urlencoded", 'method'=>'POST', 'content'=>http_build_query(array(
+			//CONFIGURAÇÕES
+			'MAIL_HOST' => SYS_MAIL_HOST,
+			'MAIL_TIPO' => SYS_MAIL_TIPO,// SMTP ("","ssl","tls")
+			'MAIL_PORTA' => SYS_MAIL_PORTA,//465
+			'MAIL_USER' => SYS_MAIL_USER,
+			'MAIL_PASS' => SYS_MAIL_PASS,
+			'MAIL_NOME' => SYS_MAIL_NOME,
+			'MAIL_EMAIL' => SYS_MAIL_EMAIL,
+			'MAIL_DEBUG' => "1",//ativar debug -- 1 = Erros e mensagens, 2 = Apenas mensagens, SMTP::DEBUG_SERVER
+			//DADOS DO ENVIO
+			'SEND_NOME' => "Teste",
+			'SEND_EMAIL' => $email,
+			'SEND_ASSUNTO' => "E-mail teste",
+			'SEND_BODY' => $html_template
+			))),"ssl"=>array("verify_peer"=>false,"verify_peer_name"=>false)
+	); $context = stream_context_create($opts);
+	//informações do retorno: 0 - bloqueado acesso, 1 - sucesso, 2 - erros de configuração, 3 - erro de classe
+	$contentResp = file_get_contents(SYS_URLRAIZ.'sys/http_send_email.php?JesusTeAma=1', false, $context);
+	echo "<br>contentResp:".$contentResp;
+	if($contentResp != "1"){
+		echo 'Opss... Ouve um problema ao enviar o e-mail!';
+		echo '<br>Mailer Error: ' . $mail->ErrorInfo;
+	}else{
+		echo 'E-mail enviado!';
+	}
+}
+
+
+?>
