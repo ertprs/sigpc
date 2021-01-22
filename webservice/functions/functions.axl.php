@@ -264,8 +264,6 @@ global $class_fLNG;
 	$id_emissao = $ARR["id_emissao"];
 	$numero_espelho = $ARR["numero_espelho"];
 	
-	print_r($ARR);
-	exit(0);
 	$valida = "";
 	if($code == ""){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'Nº do processo é obrigatório'); }
 	if($id_origem == ""){ $valida = $class_fLNG->txt(__FILE__,__LINE__,'ID da origem é obrigatório'); }else{//if($id_origem == ""){
