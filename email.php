@@ -65,7 +65,13 @@ if($ajax == "enviarEmail"){
 			'SEND_BODY' => $html_template
 			))),"ssl"=>array("verify_peer"=>false,"verify_peer_name"=>false)
 	); $context = stream_context_create($opts);
+	
+	echo "\nSERVER_ADDR:".$_SERVER["SERVER_ADDR"];
+	echo "\nREMOTE_ADDR:".$_SERVER["REMOTE_ADDR"];	
+	//if(($_SERVER["SERVER_ADDR"] != $_SERVER["REMOTE_ADDR"]) or ($_SERVER["SERVER_PORT"] != "443")){ echo "0"; exit(0); }
+	
 	//informações do retorno: 0 - bloqueado acesso, 1 - sucesso, 2 - erros de configuração, 3 - erro de classe
+	echo "<br>url:".SYS_URLRAIZ.'sys/http_send_email.php?JesusTeAma=1';
 	$contentResp = file_get_contents(SYS_URLRAIZ.'sys/http_send_email.php?JesusTeAma=1', false, $context);
 	echo "<br>contentResp:".$contentResp;
 	if($contentResp != "1"){
