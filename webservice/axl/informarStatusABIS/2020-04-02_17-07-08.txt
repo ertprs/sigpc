@@ -1,1 +1,0 @@
-"{\"numero_rnt\":\"17595874199\",\"numero_processo\":\"44147724515\",\"id_origem\":1,\"id_coleta\":10018,\"status_abis\":1,\"problemas\":[{\"id_problema\":1,\"numero_rnt\":null,\"numero_processo\":null,\"id_origem\":0,\"id_coleta\":0}]}"
