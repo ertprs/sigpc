@@ -2224,7 +2224,7 @@ if($status_b != ""){
 		if($filtro_b != ""){ $filtro_b .= ", "; } $filtro_b .= $class_fLNG->txt(__FILE__,__LINE__,'Status')." <b>".processoStatusLeg($status_b)."</b>";
 		if($SQL_where != ""){ $SQL_where .= " AND "; }
 		$SQL_where .= "P.status = '$status_b'"; //condição 
-		$AJX_GET .= "&status_b=".$status_b;
+		$SQL_varEnvio .= "&status_b=".$status_b;
 }//fim da busca por status_b
 
 
