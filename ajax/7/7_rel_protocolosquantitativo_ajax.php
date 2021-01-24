@@ -1183,7 +1183,7 @@ $cont_regT = "0";
 $table_colspan = "2";//quantidade de colunas
 $table_titu = '<tr><th>'.$class_fLNG->txt(__FILE__,__LINE__,'STATUS DE REFERÊNCIA').'</th><th>'.$class_fLNG->txt(__FILE__,__LINE__,'QUANTIDADE').'</th></tr>';//título das colunas
 $table_dados = '';//inicia a linha que recebe os dados
-
+echo "<br>SQL_where:".$SQL_where;
 //inicia a busca dos dados
 $resu1 = fSQL::SQL_SELECT_SIMPLES("P.status, SUM(1) AS soma", $SQL_tabela, "$SQL_where", "GROUP BY P.status ORDER BY RAND()");
 while($linha1 = fSQL::FETCH_ASSOC($resu1)){
