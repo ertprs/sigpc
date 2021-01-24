@@ -473,7 +473,7 @@ if($ajax == "detalhesProcesso"){
 
 	if($status_a == "3"){//IMPRESSÃO ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ >>>
 		//adicionar modal de motivo de cancelamento
-		$button = '<a href="#" class="btn btn-red btn-large" onclick="modalMotivo'.$INC_FAISHER["div"].'(\'cancelarimpressao\',\''.$id_a.'\',\''.$code.'\');return false;"><i class="glyphicon-ban"></i> '.$class_fLNG->txt(__FILE__,__LINE__,'Cancelar Impressão').'</a>';
+		//$button = '<a href="#" class="btn btn-red btn-large" onclick="modalMotivo'.$INC_FAISHER["div"].'(\'cancelarimpressao\',\''.$id_a.'\',\''.$code.'\');return false;"><i class="glyphicon-ban"></i> '.$class_fLNG->txt(__FILE__,__LINE__,'Cancelar Impressão').'</a>';
 	}//COLETA BIOMETRICA++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ >>>	
 	
 	
