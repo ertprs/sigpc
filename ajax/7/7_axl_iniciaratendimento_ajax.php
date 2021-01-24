@@ -1696,7 +1696,7 @@ if($ajax == "menuSenha"){
 	
 	$result = fSENHA::status($cVLogin->getVarLogin("SYS_USER_ID"),$servicos,$cVLogin->getVarLogin("SYS_USER_ORIGEM_ID"));
 	
-	echo "<pre>"; print_r($result); echo "</pre>";
+	//echo "<pre>"; print_r($result); echo "</pre>";
 	
 	$senha = ""; $status = ""; $mostra_opcao = "0";
 	//verificar se tem atendimento aberto

@@ -8562,7 +8562,6 @@ class fSENHA{
 	static function status($usuario_id,$servicos,$unidade_id){
 		$url = WS_URL_SENHA."?getStatus=1";
 		$url .= "&usuario_id=".$usuario_id."&servicos=".$servicos."&unidade_id=".$unidade_id;
-		echo "<br>url:".$url;
 		$arrContextOptions=array(
 		  "ssl"=>array(
 				"verify_peer"=>false,
