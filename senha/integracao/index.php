@@ -65,7 +65,7 @@ if(isset($_GET["getStatus"])){
 	//status 3 -> Atendimento Iniciado
 	$condicao = "(id_serv = '".str_replace(",","' OR id_serv = '",$servicos)."') AND id_uni = '$unidade_id' AND id_usu = '$usuario_id' AND id_stat IN ('2','3')";
 	//echo $condicao;
-	$linha = fSQL::SQL_SELECT_ONE("id_atend,id_serv,num_senha,nm_cli,id_stat,id_pri","atendimentos",$condicao);
+	$linha = fSQL::SQL_SELECT_ONE("id_atend,id_serv,num_senha,num_guiche,nm_cli,id_stat,id_pri","atendimentos",$condicao);
 	//print_r($linha);
 	if($linha["id_atend"] >= "1"){
 		//buscar sigla
@@ -80,6 +80,7 @@ if(isset($_GET["getStatus"])){
 		$res["aberto_prioridade"] = $linha["id_pri"];				
 		$res["aberto_senha"] = $sigla.completa_zero($linha["num_senha"],"4");
 		$res["aberto_status"] = $linha["id_stat"];
+		$res["aberto_cont"] = fSQL::SQL_CONTAGEM("painel_senha","num_senha = '".$linha["num_senha"]."' AND id_uni = '".$unidade_id."' AND id_serv = '".$linha["id_serv"]."' AND num_guiche = '".$linha["num_guiche"]."'");	
 	}//if($linha["id"] >= "1"){
 
 	
@@ -243,8 +244,12 @@ if(isset($_GET["chamarNovamente"])){
 	$nm_serv = $linha["nm_serv"];
 	
 	//inserir no painel de senha
-	$valores = array($unidade_id,$servico_id,$senha,$sigla,$nm_serv,"Guichê",$num_guiche);
-	fSQL::SQL_INSERT_SIMPLES("id_uni,id_serv,num_senha,sig_senha,msg_senha,nm_local,num_guiche","painel_senha",$valores);
+	$id_a = fSQL::SQL_SELECT_INSERT("painel_senha", "id");
+	$valores = array($id_a,$unidade_id,$servico_id,$senha,$sigla,$nm_serv,"Guichê",$num_guiche);
+	fSQL::SQL_INSERT_SIMPLES("id,id_uni,id_serv,num_senha,sig_senha,msg_senha,nm_local,num_guiche","painel_senha",$valores);
+
+	header('Access-Control-Allow-Origin: *');
+	echo json_encode($res);	
 }//if(isset($_GET["chamarNovamente"])){
 	
 	
