@@ -69,7 +69,7 @@ function bAvancada<?=$INC_FAISHER["div"]?>(){
 	<?php if(!isset($_GET["POP"])){?>
 	loaderFoco('divConteiner_lista<?=$INC_FAISHER["div"]?>','dAjax_lista<?=$INC_FAISHER["div"]?>_load','<?=$class_fLNG->txt(__FILE__,__LINE__,'Filtrando dados...')?>');//cria um loader dinamico
 	<?php }?>
-	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?><?php if(isset($_GET["POP"])){ echo 'pop'; }?>', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=lista&'+v_get, 'get', 'ADD');
+	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=lista&'+v_get, 'get', 'ADD');
 }//bAvancada
 
 function bAvancada<?=$INC_FAISHER["div"]?>Remove(v_remove){
