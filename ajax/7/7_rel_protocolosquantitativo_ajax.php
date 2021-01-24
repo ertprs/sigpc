@@ -1223,10 +1223,10 @@ if($filtro_b != ""){ $info_titusub .= " - ".$filtro_b; }//adiciona dados do filt
 				enabled: false
 			},
 			title: {
-				text: '<?=$info_titu?>'
+				text: "<?=$info_titu?>"
 			},
 			subtitle: {
-				text: '<?=$info_titusub?>'
+				text: "<?=$info_titusub?>"
 			},
 			tooltip: {
 				pointFormat: '{series.name}: <b>{point.y}</b>'
@@ -1543,7 +1543,7 @@ if($filtro_b != ""){ $info_titusub .= " - ".$filtro_b; }//adiciona dados do filt
 				enabled: false
 			},
 			title: {
-				text: '<?=$info_titu?>',
+				text: "<?=$info_titu?>",
 				align: 'left',
 				x: 10,
 				y: 0,
@@ -1553,7 +1553,7 @@ if($filtro_b != ""){ $info_titusub .= " - ".$filtro_b; }//adiciona dados do filt
 				}
 			},
 			subtitle: {
-				text: '<?=$info_titusub?>',
+				text: "<?=$info_titusub?>",
 				align: 'left',
 				x: 10,
 				y: 15,
@@ -1909,7 +1909,7 @@ if($filtro_b != ""){ $info_titusub .= " - ".$filtro_b; }//adiciona dados do filt
 				enabled: false
 			},
 			title: {
-				text: '<?=$info_titu?>',
+				text: "<?=$info_titu?>",
 				align: 'left',
 				x: 10,
 				y: 0,
@@ -1919,7 +1919,7 @@ if($filtro_b != ""){ $info_titusub .= " - ".$filtro_b; }//adiciona dados do filt
 				}
 			},
 			subtitle: {
-				text: '<?=$info_titusub?>',
+				text: "<?=$info_titusub?>",
 				align: 'left',
 				x: 10,
 				y: 15,
