@@ -2191,6 +2191,7 @@ if(($data_aberturai_b != "") or ($data_aberturaf_b != "")){
 		if($filtro_b != ""){ $filtro_b .= ", "; } $filtro_b .= $filtro_;
 		if($SQL_where != ""){ $SQL_where .= " AND "; }
 		$SQL_where .= " P.time >= '$timei_a' AND P.time <= '$timef_a' "; //condição
+		$SQL_varEnvio .= "&data_aberturai_b=".$data_aberturai_b."&data_aberturaf_b=".$data_aberturaf_b;
 }//fim da busca por data cadastro
 
 
@@ -2206,6 +2207,7 @@ if(($data_synci_b != "") or ($data_syncf_b != "")){
 		if($filtro_b != ""){ $filtro_b .= ", "; } $filtro_b .= $filtro_;
 		if($SQL_where != ""){ $SQL_where .= " AND "; }
 		$SQL_where .= " P.sync >= '$timei_a' AND P.sync <= '$timef_a' "; //condição
+		$SQL_varEnvio .= "&data_synci_b=".$data_synci_b."&data_syncf_b=".$data_syncf_b;
 }//fim da busca por data sync
 
 
@@ -2215,6 +2217,7 @@ if($tipo_b != ""){
 		if($filtro_b != ""){ $filtro_b .= ", "; } $filtro_b .= $class_fLNG->txt(__FILE__,__LINE__,'Busca tipo !!nome!!',array("nome"=>"<b>".$linha1["nome"]."</b>"));
 		if($SQL_where != ""){ $SQL_where .= " AND "; }
 		$SQL_where .= "P.servico_id = '$tipo_b'"; //condição 
+		$SQL_varEnvio .= "&tipo_b=".$tipo_b;
 }//fim da busca por tipo_b
 
 
@@ -2235,6 +2238,7 @@ if($usuario_id_b != ""){
 		if($filtro_b != ""){ $filtro_b .= ", "; } $filtro_b .= $class_fLNG->txt(__FILE__,__LINE__,'Busca tipo !!nome!!',array("nome"=>"<b>".$linha1["nome"]."</b>"));
 		if($SQL_where != ""){ $SQL_where .= " AND "; }
 		$SQL_where .= "P.user = '".$usuario_id_b."-%'"; //condição 
+		$SQL_varEnvio .= "&usuario_id_b=".$usuario_id_b;
 }//fim da busca por usuario_id_b
 
 
@@ -2275,7 +2279,6 @@ if($perfil_b == ""){
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||SQL vars <<<
 
 
-echo "<br>SQL_where:".$SQL_where;
 //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||SQL trata dados >>
 //trata dados do sql paginação abaixo
 			$max = $reg_por_pagina; //busca o padrao do sistema, registros por pagina
