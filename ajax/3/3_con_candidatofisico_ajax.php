@@ -2232,7 +2232,10 @@ unset($d); $d["content"] = $PRINT_ARRAY; $d["titulo"] = $boxUI_titulo; $PRINT_DA
 											<?php if(isset($_GET["POP"])){ ?>
                                             <button type="button" class="btn btn-large" rel="tooltip" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Ocultar Janela')?>" onclick="pmodalDisplay('hide');"><?=$class_fLNG->txt(__FILE__,__LINE__,'Fechar Detalhes')?></button>
 											<?php }else{//if(isset($_GET["POP"])){ ?>
-                                            <button type="button" class="btn btn-large btn-primary" rel="tooltip" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Exportar PDF')?>" onclick="enviaPDF<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Gerar PDF(imprimir)')?></button>&nbsp;<button type="button" class="btn btn-large btn-primary" rel="tooltip" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Exportar CSV')?>" onclick="enviaCSV<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Gerar CSV')?></button>&nbsp;<button type="button" class="btn btn-large esconder-sendload<?=$INC_FAISHER["div"]?>" onclick="displayAcao<?=$INC_FAISHER["div"]?>('fecha');"><?=$class_fLNG->txt(__FILE__,__LINE__,'Fechar')?></button>
+                                            <?php if($cVLogin->getVarLogin("SYS_USER_CARGO") == "GESTOR"){?>
+                                            <button type="button" class="btn btn-large btn-primary" rel="tooltip" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Exportar PDF')?>" onclick="enviaPDF<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Gerar PDF(imprimir)')?></button>&nbsp;<button type="button" class="btn btn-large btn-primary" rel="tooltip" data-original-title="<?=$class_fLNG->txt(__FILE__,__LINE__,'Exportar CSV')?>" onclick="enviaCSV<?=$INC_FAISHER["div"]?>();"><?=$class_fLNG->txt(__FILE__,__LINE__,'Gerar CSV')?></button>&nbsp;
+                                            <?php }//if($cVLogin->getVarLogin("SYS_USER_CARGO") == "GESTOR" || $cVLogin->getVarLogin("SYS_USER_ID") == "TI"){?>
+                                            <button type="button" class="btn btn-large esconder-sendload<?=$INC_FAISHER["div"]?>" onclick="displayAcao<?=$INC_FAISHER["div"]?>('fecha');"><?=$class_fLNG->txt(__FILE__,__LINE__,'Fechar')?></button>
 											<?php }//if(isset($_GET["POP"])){ ?>
 									</div>
 
@@ -3347,7 +3350,7 @@ function delLinhaEma<?=$INC_FAISHER["div"]?>(v_id,v_tr){
 										</div>
                                         
 										<div class="control-group">
-											<label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Telefone fixo')?></label>
+											<label class="control-label"><?=$class_fLNG->txt(__FILE__,__LINE__,'Telefone fixo')?> (facultatif)</label>
 											<div class="controls">
 
 	<table id="tabela_itens_fone<?=$INC_FAISHER["div"]?>" class="table table-hover table-bordered" style="margin-top:0;">
