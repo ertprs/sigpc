@@ -2889,11 +2889,11 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   </div>
   
   <div class="span3" style="margin:5px;">
-  <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="modalCadCandidato<?=$INC_FAISHER["div"]?>();return false;"><i class="icon-user" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?></div></button>
+  <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="modalCadCandidato<?=$INC_FAISHER["div"]?>();return false;"><i class="glyphicon-group" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?></div></button>
   </div>
 <script>
 function modalCadCandidato<?=$INC_FAISHER["div"]?>() {
-	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=home&POP=pop');	
+	pmodalHtml('<i class=glyphicon-group></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=home&POP=pop');	
 }
 </script>
 <?php 
@@ -2983,7 +2983,7 @@ if($cVLogin->getVarLogin("SYS_USER_CARGO") == "MANAGER" || $cVLogin->getVarLogin
 ?>
 	<div class="span3" style="margin:5px;">
 		<div class="btn-group btn-block">  
-			<a class="btn btn-blue btn-block btn-large dropdown-toggle" data-toggle="dropdown" style="padding-left:3px; padding-right:3px; height:85px;"><i class="glyphicon-briefcase" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'RELATÓRIOS')?> </div></a>
+			<a class="btn btn-blue btn-block btn-large dropdown-toggle" data-toggle="dropdown" style="padding-left:3px; padding-right:3px; height:85px;"><i class="glyphicon-charts" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'RELATÓRIOS')?> </div></a>
             <ul class="dropdown-menu">
 <?php            
 $idpermissao = "3_rel_precadastroquantitativo";
