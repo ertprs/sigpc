@@ -68,7 +68,7 @@ function bAvancada<?=$INC_FAISHER["div"]?>(){
 	<?php $idCJ = "rnt_b";?>if($("#<?=$formBusca?> #<?=$idCJ?>").val() != ""){ v_get = v_get+'&<?=$idCJ?>='+$("#<?=$formBusca?> #<?=$idCJ?>").val(); pCbusca<?=$INC_FAISHER["div"]?>('<?=$idCJ?>'); }
 
 	//loaderFoco('divConteiner_lista<?=$INC_FAISHER["div"]?>','dAjax_lista<?=$INC_FAISHER["div"]?>_load','<?=$class_fLNG->txt(__FILE__,__LINE__,'Filtrando dados...')?>');//cria um loader dinamico
-	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=lista&'+v_get, 'get', 'ADD');
+	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', '', '<?=$AJAX_PAG?>', '<?=$faisherGet?>&ajax=lista&'+v_get, 'get', 'ADD');
 }//bAvancada
 
 function bAvancada<?=$INC_FAISHER["div"]?>Remove(v_remove){
