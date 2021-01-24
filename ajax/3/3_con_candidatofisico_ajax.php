@@ -5604,7 +5604,7 @@ if($rnt_b != ""){ $filtro_marca[] = $rnt_b;
 $cMSG->imprimirMSG("","20000");//imprimir mensagens criadas
 
 
-
+echo "<br>time:".time();
 
 $valida = "0";
 if($filtro_b["doc_numero_b"] != "" and $filtro_b["datan_b"] != ""){ $valida = "1"; }
