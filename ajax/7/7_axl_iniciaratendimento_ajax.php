@@ -1761,7 +1761,7 @@ if($ajax == "menuSenha"){
                                                 <li class="red long">
                                                     <a href="#" onclick="executarAcao<?=$INC_FAISHER["div"]?>('erro');return false;"><span><i class="icon-warning-sign"></i></span><span class="name"><b><?=$class_fLNG->txt(__FILE__,__LINE__,'Erro Triagem')?></b></span></a>
                                                 </li>  
-                                                <li class="orange long">
+                                                <li class="orange long" id="li_nao_compareceu" style="display:none;">
                                                     <a href="#" onclick="executarAcao<?=$INC_FAISHER["div"]?>('naocompareceu');return false;"><span><i class="icon-thumbs-down"></i></span><span class="name"><b><?=$class_fLNG->txt(__FILE__,__LINE__,'Não Compareceu')?></b></span></a>
                                                 </li>                                                                                              
                                             
@@ -1817,12 +1817,17 @@ $(document).ready(function(e) {
 	//abrir popup thomas
 <?php }//if($acao == "iniciar" and ($result["aberto_servico_id"] == "5" or $result["aberto_servico_id"] != "4")){?>
 });
+var chamarnovamente = 0;
+
 function executarAcao<?=$INC_FAISHER["div"]?>(v_acao){
 <?php if(!isset($_SESSION["guiche"])){?>
 	selGuiche<?=$INC_FAISHER["div"]?>();
 	return;
 <?php }//if(!isset($_SESSION["guiche"])){?>		
-	
+	chamarnovamente++;
+	if(chamarnovamente > 2){
+		$("#li_nao_compareceu").fadeIn();
+	}
 	if(v_acao == "erro"){
 		pmodalHtml("<i class=icon-exchange></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'ERRO TRIAGEM')?>",'<?=$AJAX_PAG?>','get','faisher=<?=$faisher?>&ajax=redirecionarSenha&acao_senha=<?=$senha?>&acao_servico_id=<?=$result["aberto_servico_id"]?>');	
 	}else{//if(v_acao == "erro"){
