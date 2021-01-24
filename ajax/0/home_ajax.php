@@ -50,6 +50,9 @@ if($cVLogin->loginModuloPerfil("3")){//..................... 3. BASE CADASTRAL  
 	///VERIFICA PERMISSÕES DE ACESSO
 	$idpermissao = "3_con_candidatojuridico";
 	if($cVLogin->loginAcesso($idpermissao)){ $pPER["$idpermissao"] = "1"; $CONT["$idpermissao"] = fSQL::SQL_CONTAGEM("cad_candidato_juridico", ""); }//loginAcesso
+	///VERIFICA PERMISSÕES DE ACESSO
+	$idpermissao = "3_rel_precadastroquantitativo";
+	if($cVLogin->loginAcesso($idpermissao)){ $pPER["$idpermissao"] = "1"; }//loginAcesso
 }//if($cVLogin->loginModuloPerfil("3")){//..................... 3. BASE CADASTRAL  .............................................
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ver módulo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -73,6 +76,9 @@ if($cVLogin->loginModuloPerfil("7")){//..................... 7. PROCESSO  ......
 	if($cVLogin->loginAcesso($idpermissao)){ $pPER["$idpermissao"] = "1"; } 
 	///VERIFICA PERMISSÕES DE ACESSO
 	$idpermissao = "7_axl_gestaooperacao";
+	if($cVLogin->loginAcesso($idpermissao)){ $pPER["$idpermissao"] = "1"; } 	
+	///VERIFICA PERMISSÕES DE ACESSO
+	$idpermissao = "7_rel_protocolosquantitativo";
 	if($cVLogin->loginAcesso($idpermissao)){ $pPER["$idpermissao"] = "1"; } 		
 	///VERIFICA PERMISSÕES DE ACESSO
 	$idpermissao = "7_pro_protocolos";
@@ -2967,6 +2973,50 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   	<button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"><i class="icon-exchange" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE OPERAÇÃO')?> <span class="label label-lightred" id="bt_motivo_cont" style="display:none">0</span></div></button>
   </div>
 <?php }//if($pPER["$idpermissao"] == "1"){	
+
+
+
+///VERIFICA PERMISSÕES DE ACESSO
+$idpermissao = "3_rel_precadastroquantitativo";
+if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
+?>
+  <div class="span3" style="margin:5px;">
+  	<button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"><i class="icon-exchange" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'RELATÓRIO')?> <span class="label label-lightred" id="bt_motivo_cont" style="display:none">0</span></div></button>
+  </div>
+<?php }//if($pPER["$idpermissao"] == "1"){	
+
+
+
+
+
+
+
+
+///VERIFICA PERMISSÕES DE ACESSO
+if($cVLogin->getVarLogin("SYS_USER_CARGO") == "MANAGER"){ $cont_exib++;//cont exibir SPAN
+?>
+	<div class="span3" style="margin:5px;">
+		<div class="btn-group btn-block">  
+			<a class="btn btn-blue btn-block btn-large dropdown-toggle" data-toggle="dropdown" style="padding-left:3px; padding-right:3px; height:85px;"><i class="glyphicon-briefcase" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'RELATÓRIOS')?> </div></a>
+            <ul class="dropdown-menu">
+<?php            
+$idpermissao = "3_rel_precadastroquantitativo";
+if($pPER["$idpermissao"] == "1"){ ?>
+                <li><a href="#" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"> <?=$class_fLNG->txt(__FILE__,__LINE__,'Pré-Cadastro')?></a></li>
+<?php } ?>
+<?php            
+$idpermissao = "7_rel_protocolosquantitativo";
+if($pPER["$idpermissao"] == "1"){ ?>
+                <li><a href="#" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"> <?=$class_fLNG->txt(__FILE__,__LINE__,'Processos')?></a></li>
+<?php } ?>
+            </ul>
+
+</script>              
+		</div>
+	</div>
+<?php }//if($pPER["$idpermissao"] == "1"){	
+
+
 
 
 
