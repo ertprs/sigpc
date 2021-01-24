@@ -2881,6 +2881,15 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   <div class="span3" style="margin:5px;">
   <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="<?=$link?>return false;"><i class="glyphicon-circle_ok" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'INICIAR ATENDIMENTO')?></div></button>
   </div>
+  
+  <div class="span3" style="margin:5px;">
+  <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="modalCadCandidato<?=$INC_FAISHER["div"]?>();return false;"><i class="glyphicon-circle_ok" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?></div></button>
+  </div>
+<script>
+function modalCadCandidato<?=$INC_FAISHER["div"]?>() {
+	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=lista&POP=1');	
+}
+</script>
 <?php 
 
 	$array = explode(",",$_SESSION["SYS_USER_SERVICOS"]);
