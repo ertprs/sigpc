@@ -5616,7 +5616,7 @@ if($valida == "0"){
         <b><?=$class_fLNG->txt(__FILE__,__LINE__,'ATENÇÃO!')?></b><br><?=$class_fLNG->txt(__FILE__,__LINE__,'Para buscar é necessário utilizar algum filtro: <br>- Nº documento + data de nascimento <br>- !!rnt!!',array("rnt"=>SYS_CONFIG_RM_SIGLA))?>
     </div>
 <?php
-	exit(0);	
+	//exit(0);	
 }//if($valida == "0"){
 
 
