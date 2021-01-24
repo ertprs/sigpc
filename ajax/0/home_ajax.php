@@ -2887,7 +2887,7 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   </div>
 <script>
 function modalCadCandidato<?=$INC_FAISHER["div"]?>() {
-	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=lista&POP=1');	
+	pmodalHtml('<i class=icon-user></i> <?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?>','<?=$AJAX_PAG?>','get','faisher=3_con_candidatofisico&ajax=home&POP=1');	
 }
 </script>
 <?php 
