@@ -1762,7 +1762,7 @@ if($ajax == "menuSenha"){
                                                 <li class="red long">
                                                     <a href="#" onclick="executarAcao<?=$INC_FAISHER["div"]?>('erro');return false;"><span><i class="icon-warning-sign"></i></span><span class="name"><b><?=$class_fLNG->txt(__FILE__,__LINE__,'Erro Triagem')?></b></span></a>
                                                 </li>  
-                                                <li class="orange long" <?php if(isset($result["aberto_cont"]) and $result["aberto_cont"] <= 2){ echo 'style="display:none;'; }?>">
+                                                <li class="orange long" <?php if(isset($result["aberto_cont"]) and $result["aberto_cont"] < 2){ echo 'style="display:none;"'; }?>>
                                                     <a href="#" onclick="executarAcao<?=$INC_FAISHER["div"]?>('naocompareceu');return false;"><span><i class="icon-thumbs-down"></i></span><span class="name"><b><?=$class_fLNG->txt(__FILE__,__LINE__,'Não Compareceu')?></b></span></a>
                                                 </li>                                                                                              
                                             
