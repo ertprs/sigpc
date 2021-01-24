@@ -190,6 +190,7 @@ function reloadLista<?=$INC_FAISHER["div"]?>(){
 function carregaLista<?=$INC_FAISHER["div"]?>(v_get){
 	<?php if($INC_VAR["var_extra"] != ""){?>v_get = v_get+'&var_extra='+$('#var_extra<?=$INC_FAISHER["div"]?>').val(); <?php }?>
 	<?php if((isset($INC_VAR["tabs"])) and ($tab_id != "")){?>v_get = v_get+'&tab_id='+$('#tab_id<?=$INC_FAISHER["div"]?>').val(); <?php }?>
+	<?php if(isset($_GET["POP"])){?>v_get = v_get+'&POP=1'; <?php }?>
 	loaderFoco('divConteiner_lista<?=$INC_FAISHER["div"]?>','dAjax_lista<?=$INC_FAISHER["div"]?>_load','<?=$class_fLNG->txt(__FILE__,__LINE__,'Carregando listagem...')?>');//cria um loader dinamico
 	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?>&'+v_get, 'get', 'ADD');	
 }
