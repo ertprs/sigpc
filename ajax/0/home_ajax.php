@@ -2993,7 +2993,7 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
 
 
 ///VERIFICA PERMISSÕES DE ACESSO
-if($cVLogin->getVarLogin("SYS_USER_CARGO") == "MANAGER"){ $cont_exib++;//cont exibir SPAN
+if($cVLogin->getVarLogin("SYS_USER_CARGO") == "MANAGER" || $cVLogin->getVarLogin("SYS_USER_CARGO") == "TI"){ $cont_exib++;//cont exibir SPAN
 ?>
 	<div class="span3" style="margin:5px;">
 		<div class="btn-group btn-block">  
