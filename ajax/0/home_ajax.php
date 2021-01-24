@@ -2889,7 +2889,7 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   </div>
   
   <div class="span3" style="margin:5px;">
-  <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="modalCadCandidato<?=$INC_FAISHER["div"]?>();return false;"><i class="glyphicon-circle_ok" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?></div></button>
+  <button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="modalCadCandidato<?=$INC_FAISHER["div"]?>();return false;"><i class="icon-user" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE CANDIDATOS')?></div></button>
   </div>
 <script>
 function modalCadCandidato<?=$INC_FAISHER["div"]?>() {
@@ -2973,20 +2973,6 @@ if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
   	<button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"><i class="icon-exchange" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'GESTÃO DE OPERAÇÃO')?> <span class="label label-lightred" id="bt_motivo_cont" style="display:none">0</span></div></button>
   </div>
 <?php }//if($pPER["$idpermissao"] == "1"){	
-
-
-
-///VERIFICA PERMISSÕES DE ACESSO
-$idpermissao = "3_rel_precadastroquantitativo";
-if($pPER["$idpermissao"] == "1"){ $cont_exib++;//cont exibir SPAN
-?>
-  <div class="span3" style="margin:5px;">
-  	<button class="btn btn-blue btn-block btn-large" style="padding-left:3px; padding-right:3px; height:85px;" onclick="<?=$cVLogin->linkMENU($idpermissao,"")?>return false;"><i class="icon-exchange" style="font-size:25px;"></i> <div style="margin-top:10px; font-size:14px; line-height:normal;"><?=$class_fLNG->txt(__FILE__,__LINE__,'RELATÓRIO')?> <span class="label label-lightred" id="bt_motivo_cont" style="display:none">0</span></div></button>
-  </div>
-<?php }//if($pPER["$idpermissao"] == "1"){	
-
-
-
 
 
 
