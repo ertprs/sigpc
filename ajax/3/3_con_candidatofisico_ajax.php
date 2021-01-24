@@ -5610,7 +5610,8 @@ $valida = "0";
 if($filtro_b["doc_numero_b"] != "" and $filtro_b["datan_b"] != ""){ $valida = "1"; }
 if($filtro_b["rnt_b"] != ""){ $valida = "1"; }
 if($valida == "0"){
-	$SQL_where .= " AND C.id = '0'";
+	if ($SQL_where != ""){ $SQL_where .= " AND "; }
+	$SQL_where .= " C.id = '0'";
 ?>
     <div class="alert alert-warning">
         <b><?=$class_fLNG->txt(__FILE__,__LINE__,'ATENÇÃO!')?></b><br><?=$class_fLNG->txt(__FILE__,__LINE__,'Para buscar é necessário utilizar algum filtro: <br>- Nº documento + data de nascimento <br>- !!rnt!!',array("rnt"=>SYS_CONFIG_RM_SIGLA))?>
