@@ -174,9 +174,9 @@ if(isset($INC_VAR["tabs"])){
 $.doTimeout('vTimerDefalt', 100, function(){
 	<?php if(isset($_GET["VARS"])){ $d = explode("VARS=DIV&",$_SERVER["QUERY_STRING"]); $AJAX_GET .= "&".$d["1"]; }?>
 	carregaLista<?=$INC_FAISHER["div"]?>('<?=$AJAX_GET?>');
-	<?php if(isset($_GET["id_v"])){?>janelaAcao<?=$INC_FAISHER["div"]?>('visualizar','id_a=<?=$_GET["id_v"]?><?php if(isset($_GET["extra"])){ echo "&extra=".$_GET["extra"]; }?>');<?php }?>
-	<?php if(isset($_GET["id_a"])){?>janelaAcao<?=$INC_FAISHER["div"]?>('registro','id_a=<?=$_GET["id_a"]?><?php if(isset($_GET["extra"])){ echo "&extra=".$_GET["extra"]; }?>');<?php }?>
-	<?php if($INC_VAR["buscaAvancada"] == "ON"){?>faisher_ajax('divAbusca<?=$INC_FAISHER["div"]?>', '0', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?>&ajax=buscaAvancada');<?php }?>
+	<?php if(isset($_GET["id_v"])){?>janelaAcao<?=$INC_FAISHER["div"]?>('visualizar','id_a=<?=$_GET["id_v"]?><?php if(isset($_GET["extra"])){ echo "&extra=".$_GET["extra"]; }?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>');<?php }?>
+	<?php if(isset($_GET["id_a"])){?>janelaAcao<?=$INC_FAISHER["div"]?>('registro','id_a=<?=$_GET["id_a"]?><?php if(isset($_GET["extra"])){ echo "&extra=".$_GET["extra"]; }?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>');<?php }?>
+	<?php if($INC_VAR["buscaAvancada"] == "ON"){?>faisher_ajax('divAbusca<?=$INC_FAISHER["div"]?>', '0', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>&ajax=buscaAvancada');<?php }?>
 	<?php if($INC_VAR["buscaDireta"] == "ON"){?>faisher_ajax('divDbusca<?=$INC_FAISHER["div"]?>', '0', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>&ajax=buscaDireta');<?php }?>
 });//TIMER
 	
