@@ -55,7 +55,7 @@ function janelaAcao<?=$INC_FAISHER["div"]?>(v_acao,v_get){
 	if(v_acao == "visualizar"){ $('#icoVisualiza<?=$INC_FAISHER["div"]?>, #bt_visual<?=$INC_FAISHER["div"]?>').show(); }
 	if(v_acao == "registro"){ $('#icoRegistro<?=$INC_FAISHER["div"]?>, #bt_edit<?=$INC_FAISHER["div"]?>').show(); }
 	displayAcao<?=$INC_FAISHER["div"]?>('abre');
-	faisher_ajax('divAjax_acao<?=$INC_FAISHER["div"]?>', 'div_principalContent_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?>&ajax='+v_acao+'&tab_id='+$('#tab_id<?=$INC_FAISHER["div"]?>').val()+'&'+v_get,'get','ADD');
+	faisher_ajax('divAjax_acao<?=$INC_FAISHER["div"]?>', 'div_principalContent_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>&ajax='+v_acao+'&tab_id='+$('#tab_id<?=$INC_FAISHER["div"]?>').val()+'&'+v_get,'get','ADD');
 }//janelaAcao
 
 function regAnt<?=$INC_FAISHER["div"]?>(v_id){
@@ -192,7 +192,7 @@ function carregaLista<?=$INC_FAISHER["div"]?>(v_get){
 	<?php if((isset($INC_VAR["tabs"])) and ($tab_id != "")){?>v_get = v_get+'&tab_id='+$('#tab_id<?=$INC_FAISHER["div"]?>').val(); <?php }?>
 	<?php if(isset($_GET["POP"])){?>v_get = v_get+'&POP=1'; <?php }?>
 	loaderFoco('divConteiner_lista<?=$INC_FAISHER["div"]?>','dAjax_lista<?=$INC_FAISHER["div"]?>_load','<?=$class_fLNG->txt(__FILE__,__LINE__,'Carregando listagem...')?>');//cria um loader dinamico
-	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?>&'+v_get, 'get', 'ADD');	
+	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>&'+v_get, 'get', 'ADD');	
 }
 </script>
             <div style="width:100%;" id="divConteiner_lista<?=$INC_FAISHER["div"]?>">
@@ -232,7 +232,7 @@ function bRapida<?=$INC_FAISHER["div"]?>(){
 	}
 
 	loaderFoco('divConteiner_lista<?=$INC_FAISHER["div"]?>','dAjax_lista<?=$INC_FAISHER["div"]?>_load','<?=$class_fLNG->txt(__FILE__,__LINE__,'Filtrando dados...')?>');//cria um loader dinamico
-	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?>&<?=$AJAX_GETi?>'+v_get, 'get', 'ADD');
+	faisher_ajax('divAjax_lista<?=$INC_FAISHER["div"]?>', 'dAjax_lista<?=$INC_FAISHER["div"]?>_load', '<?=$AJAX_PAG?>', 'faisher=<?=$faisher?><?php if(isset($_GET["POP"])){ echo '&POP=1'; }?>&<?=$AJAX_GETi?>'+v_get, 'get', 'ADD');
 }//bRapida
 
 function bRapida<?=$INC_FAISHER["div"]?>Remove(v_remove){
