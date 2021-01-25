@@ -370,7 +370,7 @@ if(isset($_GET["novaSenha"])){
 
 		if($senha_antiga != ""){
 			$senha_antiga = (int)substr($senha_antiga,1,4);
-			fSQL::SQL_UPDATE_SIMPLES("id_stat","atendimentos",array("7"),"id_uni = '".$unidade_id."' AND id_serv = '".$servico_id."' AND num_senha = '".$senha_antiga."'");
+			fSQL::SQL_UPDATE_SIMPLES("id_stat","atendimentos",array("8"),"id_uni = '".$unidade_id."' AND id_serv = '".$servico_id."' AND num_senha = '".$senha_antiga."'");
 		}
 		
 		$res["senha"] = $sigla.completa_zero($senha,"4");
